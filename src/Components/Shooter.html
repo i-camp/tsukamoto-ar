@@ -1,0 +1,30 @@
+<div class="shooter-area" on:click='shoot()'></div>
+<p>{{ count }}</p>
+
+
+<style>
+  p {
+    margin: 0;
+  }
+  .shooter-area {
+    width: 100vw;
+    height: 100vh;
+    display: block;
+    position: absolute;
+    z-index: 10;
+  }
+</style>
+
+<script>
+  let count = 0;
+  export default {
+    data() {
+      return {count: count}
+    },
+    methods: {
+      shoot() {
+        this.set({ count: count++});
+      }
+    }
+  };
+</script>

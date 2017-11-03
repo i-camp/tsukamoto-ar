@@ -13,14 +13,19 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(js|html)$/,
         loader: 'babel-loader',
         exclude: /node_modules/
+      },
+      {
+        test: /\.html$/,
+        exclude: /node_modules/,
+        use: 'svelte-loader'
       }
     ]
   },
   resolve: {
-    extensions: ['.js'],
+    extensions: ['.js', '.html'],
     modules: [
       'node_modules',
       'src'
