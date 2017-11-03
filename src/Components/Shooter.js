@@ -6,7 +6,6 @@ const ShooterComponent = new Shooter({
   target: document.querySelector('.shooter'),
 });
 
-const isVibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
 let count = 0;
 
 ShooterComponent.set({
@@ -36,10 +35,6 @@ ShooterComponent.on('switch', e => {
 });
 
 ShooterComponent.on('shoot', e => {
-  if (isVibrate){
-    navigator.vibrate(100);
-  }
-
   if (ShooterComponent._state.type === ShootType.add) {
     count++;
     // TODO pathとvalueの動的指定
