@@ -7,6 +7,8 @@
   "author": "kubotak-is <kubotak@istyle.co.jp>",
   "license": "MIT",
   "dependencies": {
+    "aframe": "^0.7.1",
+    "ar.js": "^1.4.10",
     "babel": "^6.23.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
