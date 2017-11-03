@@ -1,0 +1,22 @@
+{
+  "name": "tsukamoto-ar",
+  "version": "0.0.1",
+  "description": "塚本さんを倒すゲーム",
+  "main": "index.js",
+  "repository": "git@github.com:kubotak-is/tsukamoto-ar.git",
+  "author": "kubotak-is <kubotak@istyle.co.jp>",
+  "license": "MIT",
+  "dependencies": {
+    "babel": "^6.23.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "firebase": "^4.6.1",
+    "path": "^0.12.7",
+    "webpack": "^3.8.1"
+  },
+  "scripts": {
+    "build": "webpack",
+    "server": "webpack-dev-server"
+  }
+}
