@@ -49,11 +49,14 @@
     display: block;
     position: absolute;
     z-index: 10;
+    background: no-repeat center/5% url('./assets/aiming.svg');
   }
 </style>
 
 <script>
   import ShootType from '../ValueObjects/ShootType'
+
+  const isVibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
   
   export default {
     methods: {
@@ -68,6 +71,9 @@
         });
       },
       shoot() {
+        if (isVibrate){
+          navigator.vibrate(100);
+        }
         this.fire('shoot', {});
       }
     }
