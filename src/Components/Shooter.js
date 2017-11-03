@@ -1,5 +1,6 @@
 import Shooter from './Shooter.html';
 import ShootType from '../ValueObjects/ShootType'
+import database from '../firebaseDatabase.js';
 
 const ShooterComponent = new Shooter({
   target: document.querySelector('.shooter'),
@@ -36,9 +37,19 @@ ShooterComponent.on('switch', e => {
 ShooterComponent.on('shoot', e => {
   if (ShooterComponent._state.type === ShootType.add) {
     ShooterComponent.set({ count: count++});
+    // TODO pathとvalueの動的指定
+    database.ref('/0/tsukamotota').push().set({
+      attack: 0,
+      recovery: 1
+    });
   } else {
     ShooterComponent.set({ count: count--});
-  } 
+    // TODO pathとvalueの動的指定
+    database.ref('/0/tsukamotota').push().set({
+      attack: 1,
+      recovery: 0
+    });
+  }
 });
 
 export default ShooterComponent;
