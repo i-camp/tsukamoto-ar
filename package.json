@@ -23,5 +23,6 @@
   "scripts": {
     "build": "webpack",
     "server": "webpack-dev-server"
+    "deploy": "firebase deploy"
   }
 }
