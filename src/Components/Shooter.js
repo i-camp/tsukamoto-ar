@@ -6,6 +6,7 @@ const ShooterComponent = new Shooter({
   target: document.querySelector('.shooter'),
 });
 
+const isVibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
 let count = 0;
 
 ShooterComponent.set({
@@ -35,21 +36,26 @@ ShooterComponent.on('switch', e => {
 });
 
 ShooterComponent.on('shoot', e => {
+  if (isVibrate){
+    navigator.vibrate(100);
+  }
+
   if (ShooterComponent._state.type === ShootType.add) {
-    ShooterComponent.set({ count: count++});
+    count++;
     // TODO pathとvalueの動的指定
     database.ref('/0/tsukamotota').push().set({
       attack: 0,
       recovery: 1
     });
   } else {
-    ShooterComponent.set({ count: count--});
+    count--;
     // TODO pathとvalueの動的指定
     database.ref('/0/tsukamotota').push().set({
       attack: 1,
       recovery: 0
     });
   }
+  ShooterComponent.set({ count: count });
 });
 
 export default ShooterComponent;
