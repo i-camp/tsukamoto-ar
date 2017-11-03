@@ -8,7 +8,7 @@
   "license": "MIT",
   "dependencies": {
     "aframe": "^0.7.1",
-    "ar.js": "git+https://github.com/jeromeetienne/AR.js.git",
+    "ar.js": "https://github.com/jeromeetienne/AR.js.git",
     "babel": "^6.23.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
