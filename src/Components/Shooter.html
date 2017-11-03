@@ -1,3 +1,9 @@
+<div class="shooter-switch">
+  <div class="shooter-switch__inner">
+    <button class="shooter-switch__button--add shooter-switch__button {{ addClass ? 'active' : '' }}" on:click='switchAdd()'>+</button>
+    <button class="shooter-switch__button--remove shooter-switch__button {{ removeClass ? 'active' : '' }}" on:click='switchRemove()'>-</button>
+  </div>
+</div>
 <div class="shooter-area" on:click='shoot()'></div>
 <p>{{ count }}</p>
 
@@ -5,6 +11,29 @@
 <style>
   p {
     margin: 0;
+  }
+  .shooter-switch {
+    bottom: 10px;
+    right: 10px;
+    position: fixed;
+    z-index: 100;
+  }
+  .shooter-switch__inner {
+    display: flex;
+  }
+  .shooter-switch__button {
+    font-size: 2rem;
+    border: none;
+    width: 50px;
+    height: 50px;
+    display: block;
+    background-color: #dfdfdf;
+  }
+  .shooter-switch__button--add.active {
+    background-color: #40e220;
+  }
+  .shooter-switch__button--remove.active {
+    background-color: #ff4040;
   }
   .shooter-area {
     width: 100vw;
@@ -16,14 +45,22 @@
 </style>
 
 <script>
-  let count = 0;
+  import ShootType from '../ValueObjects/ShootType'
+  
   export default {
-    data() {
-      return {count: count}
-    },
     methods: {
+      switchAdd() {
+        this.fire('switch', {
+          type: ShootType.add
+        });
+      },
+      switchRemove() {
+        this.fire('switch', {
+          type: ShootType.remove
+        });
+      },
       shoot() {
-        this.set({ count: count++});
+        this.fire('shoot', {});
       }
     }
   };
