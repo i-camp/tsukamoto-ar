@@ -1,1 +1,1 @@
-const test = "test";
+import Shooter from './Components/Shooter.js'
