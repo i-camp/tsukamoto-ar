@@ -19,5 +19,9 @@
   "scripts": {
     "build": "webpack",
     "server": "webpack-dev-server"
+  },
+  "devDependencies": {
+    "aframe": "^0.7.1",
+    "ar.js": "git+https://github.com/jeromeetienne/AR.js.git"
   }
 }
