@@ -1,0 +1,8 @@
+language: node_js
+node_js:
+  - iojs
+  - '8'
+install:
+  - npm install
+after_success:
+  - npm run deploy -- --token $FIREBASE_TOKEN

@@ -1,0 +1,10 @@
+{
+  "hosting": {
+      "public": "tsukamoto-ar",
+      "ignore": [
+            "firebase.json",
+            "**/.*",
+            "**/node_modules/**"
+          ]
+    }
+}
