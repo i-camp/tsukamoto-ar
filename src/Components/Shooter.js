@@ -6,13 +6,14 @@ const ShooterComponent = new Shooter({
   target: document.querySelector('.shooter'),
 });
 
-let count = 0;
+let attack   = 0;
+let recovery = 0;
 
 ShooterComponent.set({
   type: ShootType.add,
   addClass: true,
   removeClass: false,
-  count: count
+  count: attack - recovery
 });
 
 ShooterComponent.on('switch', e => {
@@ -36,21 +37,31 @@ ShooterComponent.on('switch', e => {
 
 ShooterComponent.on('shoot', e => {
   if (ShooterComponent._state.type === ShootType.add) {
-    count++;
-    // TODO pathとvalueの動的指定
-    database.ref('/0/tsukamotota').push().set({
-      attack: 0,
-      recovery: 1
-    });
+    attack++;
   } else {
-    count--;
-    // TODO pathとvalueの動的指定
-    database.ref('/0/tsukamotota').push().set({
-      attack: 1,
-      recovery: 0
-    });
+    recovery++;
   }
-  ShooterComponent.set({ count: count });
+  ShooterComponent.set({ count: attack - recovery });
 });
+
+// 1秒間隔で送る
+setInterval(
+  () => {
+  // 変更がない場合
+  if (attack === 0 && recovery === 0) {
+    return;
+  }
+
+  // TODO 格納するユーザーを可変にする
+  database.ref('/0/tsukamotota').push().set({
+    attack: attack,
+    recovery: recovery
+  });
+
+  // reset
+  attack   = 0;
+  recovery = 0;
+  
+}, 1000);
 
 export default ShooterComponent;
