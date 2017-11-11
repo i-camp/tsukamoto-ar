@@ -1,6 +1,7 @@
-import Shooter from './Shooter.html';
+import Shooter from './Shooter.html'
 import ShootType from '../ValueObjects/ShootType'
-import database from '../firebaseDatabase.js';
+import database from '../firebaseDatabase'
+import audio from '../Util/Audio'
 
 const ShooterComponent = new Shooter({
   target: document.querySelector('.shooter'),
@@ -17,6 +18,7 @@ ShooterComponent.set({
 });
 
 ShooterComponent.on('switch', e => {
+  audio.playAudio('./assets/change.mp3');
   ShooterComponent.set({
     type: e.type
   });
@@ -36,6 +38,7 @@ ShooterComponent.on('switch', e => {
 });
 
 ShooterComponent.on('shoot', e => {
+  audio.playAudio('./assets/shot.mp3');
   if (ShooterComponent._state.type === ShootType.add) {
     attack++;
   } else {
