@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="index.js" defer async></script>
+  <!-- three.js library @@@ -->
+  <script src='./arjs/vendor/three.js/build/three.min.js'></script>
+  <script src="./arjs/build/ar.js"></script>
+  <script src="./arjs/src/new-api/arjs-hittesting.js"></script>
+  <!-- setting base URL -->
+  <script>THREEx.ArToolkitContext.baseURL = '.'</script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
+  <link rel="manifest" href="manifest.json">
+  <style>
+    html, body {
+      width: 100vw;
+      height: 100vh;
+    }
+  </style>
+</head>
+<body style='margin : 0px; overflow: hidden;'>
+<script>
+  //////////////////////////////////////////////////////////////////////////////////
+  //    Init
+  //////////////////////////////////////////////////////////////////////////////////
+
+  var screenWidth = window.innerWidth //document.body.clientWidth
+  var screenHeight = window.innerHeight //document.body.clientHeight
+  var screenCenterX = screenWidth / 2.0
+  var screenCenterY = screenHeight / 2.0
+  var normScreenCenterX = (screenCenterX/screenWidth) * 2.0 - 1.0
+  var normScreenCenterY = - (screenCenterY/screenHeight) * 2.0 + 1.0
+  var centerVec = new THREE.Vector3(normScreenCenterX, normScreenCenterY, 1)
+  var objArr = [];
+
+  // init renderer
+  var renderer  = new THREE.WebGLRenderer({
+    antialias: true,
+    alpha: true
+  });
+  renderer.setClearColor(new THREE.Color('lightgrey'), 0)
+  renderer.setSize( 640, 480 );
+  renderer.domElement.style.position = 'absolute'
+  renderer.domElement.style.top = '0px'
+  renderer.domElement.style.left = '0px'
+  document.body.appendChild( renderer.domElement );
+
+  // array of functions for the rendering loop
+  var onRenderFcts= [];
+
+  // init scene and camera
+  var scene = new THREE.Scene();
+
+  //////////////////////////////////////////////////////////////////////////////////
+  //    Initialize a basic camera
+  //////////////////////////////////////////////////////////////////////////////////
+
+  // Create a camera
+  var camera = new THREE.Camera();
+  scene.add(camera);
+
+  centerVec.unproject(camera)
+  var ray = new THREE.Raycaster(camera.position, centerVec.sub(camera.position).normalize());
+
+  ////////////////////////////////////////////////////////////////////////////////
+  //          handle arToolkitSource
+  ////////////////////////////////////////////////////////////////////////////////
+
+  var arToolkitSource = new THREEx.ArToolkitSource({
+    sourceType : 'webcam',  
+  });
+  arToolkitSource.init(function onReady(){
+    onResize()
+  });
+  window.addEventListener('resize', function(){
+    onResize()
+  });
+  function onResize(){
+    screenWidth = window.innerWidth;
+    screenHeight = window.innerHeight;
+    screenCenterX = screenWidth/2
+    screenCenterY = screenHeight/2
+    normScreenCenterX = (screenCenterX/screenWidth) * 2.0 - 1.0
+    normScreenCenterY = - (screenCenterY/screenHeight) * 2.0 + 1.0
+    centerVec = new THREE.Vector3(normScreenCenterX, normScreenCenterY, 1)
+    centerVec.unproject(camera)
+    ray = new THREE.Raycaster(camera.position, centerVec.sub(camera.position).normalize());
+
+    arToolkitSource.onResize()  
+    arToolkitSource.copySizeTo(renderer.domElement) 
+    if( arToolkitContext.arController !== null ){
+      arToolkitSource.copySizeTo(arToolkitContext.arController.canvas)  
+    } 
+  };
+  ////////////////////////////////////////////////////////////////////////////////
+  //          initialize arToolkitContext
+  ////////////////////////////////////////////////////////////////////////////////
+  
+  var arToolkitContext = new THREEx.ArToolkitContext({
+    cameraParametersUrl: THREEx.ArToolkitContext.baseURL + '/arjs/data/camera_para.dat',
+    detectionMode: 'mono',
+  });
+  arToolkitContext.init(function onCompleted(){
+    // copy projection matrix to camera
+    camera.projectionMatrix.copy( arToolkitContext.getProjectionMatrix() );
+  });
+
+  onRenderFcts.push(function(){
+    if( arToolkitSource.ready === false ) return
+
+    arToolkitContext.update( arToolkitSource.domElement )
+    // update scene.visible if the marker is seen
+    scene.visible = camera.visible
+  });
+    
+  ////////////////////////////////////////////////////////////////////////////////
+  //          Create a ArMarkerControls
+  ////////////////////////////////////////////////////////////////////////////////
+  
+  // init controls for camera
+  var markerControls = new THREEx.ArMarkerControls(arToolkitContext, camera, {
+    type : 'pattern',
+    patternUrl : THREEx.ArToolkitContext.baseURL + '/arjs/data/patt.hiro',
+    changeMatrixMode: 'cameraTransformMatrix'
+  });
+  // as we do changeMatrixMode: 'cameraTransformMatrix', start with invisible scene
+  scene.visible = false;
+
+  //////////////////////////////////////////////////////////////////////////////////
+  //    add an object in the scene
+  //////////////////////////////////////////////////////////////////////////////////
+
+  // TODO Modified 3D Object 
+  var geometry  = new THREE.CubeGeometry(1,1,1);
+  var material  = new THREE.MeshNormalMaterial({
+    transparent : true,
+    opacity: 0.5,
+    side: THREE.DoubleSide
+  }); 
+  var mesh  = new THREE.Mesh( geometry, material );
+  mesh.position.y = geometry.parameters.height/2;
+  objArr.push(mesh);
+  scene.add( mesh );
+  
+  onRenderFcts.push(function(delta){
+    mesh.rotation.x += Math.PI*delta
+    //console.log(mesh.position); // 0.0, 0.5, 0.0 になっている...
+    /*console.log(screenHeight);
+    console.log(screenWidth);
+    console.log(screenCenterX)
+    console.log(screenCenterY)
+    console.log(normScreenCenterX)
+    console.log(normScreenCenterY)*/
+    // Meshが表示でTrue 非表示False
+    //console.log(markerControls.object3d.visible) 
+    //console.log(markerControls.object3d.position)
+    if (markerControls.object3d.visible === true) {
+      console.log('表示されている状態');
+    }
+  })
+
+  //////////////////////////////////////////////////////////////////////////////////
+  //    render the whole thing on the page
+  //////////////////////////////////////////////////////////////////////////////////
+
+  onRenderFcts.push(function(){
+    renderer.render( scene, camera );
+  });
+
+  var lastTimeMsec= null
+  requestAnimationFrame(function animate(nowMsec){
+    // keep looping
+    requestAnimationFrame( animate );
+    // measure time
+    lastTimeMsec  = lastTimeMsec || nowMsec-1000/60
+    var deltaMsec = Math.min(200, nowMsec - lastTimeMsec)
+    lastTimeMsec  = nowMsec
+    // call each update function
+    onRenderFcts.forEach(function(onRenderFct){
+      onRenderFct(deltaMsec/1000, nowMsec/1000)
+    })
+  });
+</script>
+</body>
+</html>
