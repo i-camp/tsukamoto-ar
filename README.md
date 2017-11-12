@@ -18,3 +18,6 @@ open chrome `chrome://inspect/#devices`
 check to `Enable port forwarding`
 
 -> Open `localhost:3000` From Android or iOS Chrome.
+
+## License
+sound by https://maoudamashii.jokersounds.com
