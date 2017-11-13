@@ -1,44 +1,33 @@
-window.AudioContext = window.AudioContext || window.webkitAudioContext;  
-const context = new AudioContext();
+export default class Audio {
 
-class Audio {
-
-  playAudio(url) {
-    this._getAudioBuffer(url, buffer => {
-      this._play(buffer);
-    });
+  constructor(url) {
+    this.url = url;
+    this.context;
+    this.buffer;
+    this._bufferLoad();
   }
 
-  _getAudioBuffer(url, fn) {
-    let req = new XMLHttpRequest();
-    req.responseType = 'arraybuffer';
-    
-      req.onreadystatechange = () => {
-        if (req.readyState === 4) {
-          if (req.status === 0 || req.status === 200) {
-            // array buffer を audio buffer に変換
-            context.decodeAudioData(req.response, buffer => {
-              // コールバックを実行
-              fn(buffer);
-            });
-          }
-        }
-      };
-    
-      req.open('GET', url, true);
-      req.send('');
-  }
-
-  _play(buffer) {
-    // source を作成
-    let source = context.createBufferSource();
-    // buffer をセット
-    source.buffer = buffer;
-    // context に connect
-    source.connect(context.destination);
-    // 再生
+  play() {
+    let source = this.context.createBufferSource();
+    source.buffer = this.buffer;
+    source.connect(this.context.destination);
     source.start(0);
   }
-}
 
-export default new Audio();
+  _bufferLoad() {
+    window.AudioContext = window.AudioContext || window.webkitAudioContext;  
+    this.context = new AudioContext();
+
+    let request = new XMLHttpRequest();
+    request.open('GET', this.url, true);
+    request.responseType = 'arraybuffer';
+  
+    // Decode asynchronously
+    request.onload = () => {
+      this.context.decodeAudioData(request.response, buffer => {
+        this.buffer = buffer;
+      }, onError);
+    }
+    request.send();
+  }
+}
