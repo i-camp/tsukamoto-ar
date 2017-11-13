@@ -24,6 +24,7 @@
   </style>
 </head>
 <body style='margin : 0px; overflow: hidden;'>
+<section class="shooter"></section>
 <script>
   //////////////////////////////////////////////////////////////////////////////////
   //    Init
@@ -149,18 +150,16 @@
   
   onRenderFcts.push(function(delta){
     mesh.rotation.x += Math.PI*delta
-    //console.log(mesh.position); // 0.0, 0.5, 0.0 になっている...
-    /*console.log(screenHeight);
-    console.log(screenWidth);
-    console.log(screenCenterX)
-    console.log(screenCenterY)
-    console.log(normScreenCenterX)
-    console.log(normScreenCenterY)*/
-    // Meshが表示でTrue 非表示False
-    //console.log(markerControls.object3d.visible) 
-    //console.log(markerControls.object3d.position)
-    if (markerControls.object3d.visible === true) {
-      console.log('表示されている状態');
+
+    var X = ((window.innerWidth / 2) / window.innerWidth)  * 2 - 1; ;
+    var Y = -((window.innerHeight / 2) / window.innerHeight) * 2 + 1;
+    var pos = new THREE.Vector3(X, Y, 1);
+    pos.unproject(camera);
+    var ray = new THREE.Raycaster(camera.position, pos.sub(camera.position).normalize());
+    var obj = ray.intersectObjects(scene.children, true);
+    if (obj.length > 1) {
+      console.log(obj);
+      obj.length = 0;
     }
   })
 
