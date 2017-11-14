@@ -7,6 +7,9 @@ const ShooterComponent = new Shooter({
   target: document.querySelector('.shooter'),
 });
 
+const ChangeSound = new Audio("./assets/change.mp3");
+const ShotSound   = new Audio("./assets/shot.mp3");
+
 let attack   = 0;
 let recovery = 0;
 
@@ -18,7 +21,7 @@ ShooterComponent.set({
 });
 
 ShooterComponent.on('switch', e => {
-  audio.playAudio('./assets/change.mp3');
+  ChangeSound.play();
   ShooterComponent.set({
     type: e.type
   });
@@ -38,7 +41,7 @@ ShooterComponent.on('switch', e => {
 });
 
 ShooterComponent.on('shoot', e => {
-  audio.playAudio('./assets/shot.mp3');
+  ShotSound.play();
   if (ShooterComponent._state.type === ShootType.add) {
     attack++;
   } else {
