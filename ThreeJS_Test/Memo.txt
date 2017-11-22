@@ -1,0 +1,4 @@
+objファイルをLoadする方法のブランチ
+ARのつかいかたはAR.jsの
+https://github.com/jeromeetienne/AR.js/blob/master/three.js/examples/basic.html
+examplesの中を漁る。
