@@ -7,11 +7,13 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <script src='./arjs/vendor/three.js/build/three.min.js'></script>
+  <script src="./arjs/vendor/three.js/examples/js/loaders/MTLLoader.js"></script>
+  <script src="./arjs/vendor/three.js/examples/js/loaders/OBJLoader.js"></script>
+  <script src="./arjs/build/ar.js"></script>
   <script src="index.js" defer async></script>
-  <script src="https://aframe.io/releases/0.6.1/aframe.min.js"></script>
-  <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.5.0/aframe/build/aframe-ar.js"> </script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
-  <link rel="manifest" href="manifest.json">
+  <!--link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css"-->
+  <!-- link rel="manifest" href="manifest.json" -->
   <style>
     html, body {
       width: 100vw;
@@ -20,13 +22,5 @@
   </style>
 </head>
 <body>
-  <a-scene embedded arjs>
-    <a-marker preset="hiro">
-      <!-- (マーカー)https://jeromeetienne.github.io/AR.js/three.js/examples/arcode.html -->
-      <a-obj-model src="./model/model.obj" mtl="./model/model.mtl"></a-obj-model>
-    </a-marker>
-    <a-entity camera></a-entity>
-  </a-scene>
-  <section class="shooter"></section>
 </body>
 </html>
