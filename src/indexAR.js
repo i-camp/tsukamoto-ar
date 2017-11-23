@@ -1,6 +1,8 @@
 
 const modelMaxNum = 2;
 let modelNum = 0;
+const centerX = 0;
+const centerY = 0;
 var renderer  = new THREE.WebGLRenderer({
   antialias: true,
   alpha: true
@@ -158,11 +160,25 @@ var mtlLoader2 = new THREE.MTLLoader();
 onRenderFcts.push(function(delta){
   if (markerControls.object3d.visible === true) {
     console.log('1:表示されている状態');
+    isCenter();
   }
   if (markerControls2.object3d.visible === true) {
     console.log('2:表示されている状態');
+    isCenter();
   }
 })
+
+function isCenter() {
+  var pos = new THREE.Vector3(centerX, centerY, 1);
+  pos.unproject(camera);
+  var ray = new THREE.Raycaster(camera.position, pos.sub(camera.position).normalize());
+  var hitObj = ray.intersectObjects(scene.children, true);
+  if(hitObj.length > 0) {
+    console.log(hitObj[0].object.parent.name);
+    // To Do Event Fire!
+    // 一応、配列に名前一覧いれてCheckしてからEvent発火するか?
+  }
+}
 
 // render the whole thing on the page
 onRenderFcts.push(function(){
