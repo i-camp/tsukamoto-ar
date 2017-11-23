@@ -1,6 +1,4 @@
 
-let testS = "送れている?"; // カスタムイベントのテスト
-
 const modelMaxNum = 2;
 let modelNum = 0;
 var renderer  = new THREE.WebGLRenderer({
@@ -184,5 +182,3 @@ requestAnimationFrame(function animate(nowMsec){
     onRenderFct(deltaMsec/1000, nowMsec/1000)
   })
 });
-
-export default testS;
