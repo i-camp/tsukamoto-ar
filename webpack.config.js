@@ -39,15 +39,15 @@ module.exports = {
 
   plugins: [
     new webpack.optimize.AggressiveMergingPlugin(),
-    // new webpack.optimize.UglifyJsPlugin({
-    //   debug: false,
-    //   minimize: true,
-    //   output: {
-    //     comments: false
-    //   },
-    //   compressor: {
-    //     warnings: false
-    //   }
-    // }),
+    new webpack.optimize.UglifyJsPlugin({
+      debug: false,
+      minimize: true,
+      output: {
+        comments: false
+      },
+      compressor: {
+        warnings: false
+      }
+    }),
   ]
 }
