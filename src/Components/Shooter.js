@@ -2,6 +2,8 @@ import Shooter from './Shooter.html'
 import ShootType from '../ValueObjects/ShootType'
 import database from '../firebaseDatabase'
 import audio from '../Util/Audio'
+import * as PubSub from 'pubsub-js'
+import EventType from '../ValueObjects/EventType'
 
 const ShooterComponent = new Shooter({
   target: document.querySelector('.shooter'),
@@ -42,6 +44,10 @@ ShooterComponent.on('switch', e => {
 
 ShooterComponent.on('shoot', e => {
   ShotSound.play();
+  PubSub.publish(EventType.shot);
+});
+
+PubSub.subscribe(EventType.isHit, (e, data) => {
   if (ShooterComponent._state.type === ShootType.add) {
     attack++;
   } else {
