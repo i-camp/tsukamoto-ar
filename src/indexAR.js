@@ -4,6 +4,7 @@ let modelNum = 0;
 const centerX = 0;
 const centerY = 0;
 let meshNames = ['meshName1', 'meshName2'];
+const modesPath = './models/';
 var renderer  = new THREE.WebGLRenderer({
   antialias: true,
   alpha: true
@@ -100,14 +101,14 @@ var onError = function ( xhr ) {};
 
 let mesh0
 var mtlLoader = new THREE.MTLLoader();
-  mtlLoader.setPath( './model/' );
+  mtlLoader.setPath(modesPath);
   mtlLoader.load( 'LEGO_Man.mtl', function( materials ) {
 
   materials.preload();
 
   var objLoader = new THREE.OBJLoader();
   objLoader.setMaterials( materials );
-  objLoader.setPath( './model/' );
+  objLoader.setPath(modesPath);
   objLoader.load( 'LEGO_Man.obj', function ( object ) {
 
   object.scale.x = 0.2;
@@ -140,14 +141,14 @@ var onProgress1 = function ( xhr ) {
 
 let mesh1
 var mtlLoader1 = new THREE.MTLLoader();
-  mtlLoader1.setPath( './model/' );
+  mtlLoader1.setPath(modesPath);
   mtlLoader1.load( 'LegoBricks3.mtl', function( materials ) {
 
   materials.preload();
 
   var objLoader = new THREE.OBJLoader();
   objLoader.setMaterials( materials );
-  objLoader.setPath( './model/' );
+  objLoader.setPath(modesPath);
   objLoader.load( 'LegoBricks3.obj', function ( object ) {
 
   object.scale.x = 0.01;
