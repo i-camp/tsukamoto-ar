@@ -113,6 +113,7 @@ var mtlLoader = new THREE.MTLLoader();
   object.scale.y = 0.2;
   object.scale.z = 0.2;
   mesh = object
+  mesh.name = "testName1";
   marker1.add(mesh);
   }, onProgress, onError );
 });
@@ -152,6 +153,7 @@ var mtlLoader2 = new THREE.MTLLoader();
   object.scale.y = 0.1;
   object.scale.z = 0.1;
   mesh2 = object
+  mesh2.name = "testName2";
   marker2.add(mesh2);
 
   }, onProgress2, onError );
