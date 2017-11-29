@@ -48,6 +48,7 @@ ShooterComponent.on('shoot', e => {
 });
 
 PubSub.subscribe(EventType.isHit, (e, data) => {
+  console.log(data);//consoleでの確認OK
   if (ShooterComponent._state.type === ShootType.add) {
     attack++;
   } else {

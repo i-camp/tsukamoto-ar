@@ -1,3 +1,5 @@
+import EventType from './ValueObjects/EventType'
+import * as PubSub from 'pubsub-js'
 
 let modelNum = 0;
 const centerX = 0;
@@ -273,6 +275,10 @@ function isCenter() {
     console.log(hitObj[0].object.parent.name);
     // To Do Event Fire!
     // 一応、配列に名前一覧いれてCheckしてからEvent発火するか?
+    PubSub.subscribe(EventType.shot, e => {
+      PubSub.publish(EventType.isHit, {name: "tsukamotota"});
+    });
+
   }
 }
 

@@ -5,5 +5,5 @@ import * as IndexAR from 'indexAR.js'
 
 PubSub.subscribe(EventType.shot, e => {
   // TODO オブジェクトの中心判定
-  PubSub.publish(EventType.isHit, {name: "tsukamotota"});
+  //PubSub.publish(EventType.isHit, {name: "tsukamotota"});
 });
