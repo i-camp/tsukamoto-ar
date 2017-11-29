@@ -1,9 +1,9 @@
 
-const modelMaxNum = 3;
 let modelNum = 0;
 const centerX = 0;
 const centerY = 0;
-let meshNames = ['meshName1', 'meshName2', 'meshName3'];
+let meshNames = ['meshName1', 'meshName2', 'meshName3', 'tsukamotoMesh'];
+const modelMaxNum = meshNames.length;
 const modesPath = './models/';
 var renderer  = new THREE.WebGLRenderer({
   antialias: true,
@@ -57,7 +57,7 @@ arToolkitContext.init(function onCompleted(){
 onRenderFcts.push(function(){
 
   if( arToolkitSource.ready === false ) return
-  
+
   // load Completed play
   if( modelMaxNum > modelNum ) {
     console.log('loading...');
@@ -202,6 +202,46 @@ var mtlLoader2 = new THREE.MTLLoader();
   }, onProgress2, onError );
 });
 
+// init maker3
+let marker3 = new THREE.Group(); 
+var markerControls3 = new THREEx.ArMarkerControls(arToolkitContext, marker3, {
+  type : 'pattern',
+  patternUrl : './arjs/data/neko.pat',
+});
+scene.add(marker3);
+
+var onProgress3 = function ( xhr ) {
+  if ( xhr.lengthComputable ) {
+      var percentComplete = xhr.loaded / xhr.total * 100;
+      if (percentComplete >= 100) {
+        modelNum += 1;
+      }
+      console.log( Math.round(percentComplete, 2) + '% downloaded' );
+  }
+};
+
+let mesh3
+var mtlLoader3 = new THREE.MTLLoader();
+  mtlLoader3.setPath(modesPath);
+  mtlLoader3.load( 'tsukamotoModel.mtl', function( materials ) {
+
+  materials.preload();
+
+  var objLoader = new THREE.OBJLoader();
+  objLoader.setMaterials( materials );
+  objLoader.setPath(modesPath);
+  objLoader.load( 'tsukamotoModel.obj', function ( object ) {
+
+  object.scale.x = 0.7;
+  object.scale.y = 0.7;
+  object.scale.z = 0.7;
+  mesh3 = object
+  mesh3.name = meshNames[3];
+  marker3.add(mesh3);
+
+  }, onProgress3, onError );
+});
+
 
 
 
@@ -216,6 +256,10 @@ onRenderFcts.push(function(delta){
   }
   if (markerControls2.object3d.visible === true) {
     console.log('2:表示されている状態');
+    isCenter();
+  }
+  if (markerControls3.object3d.visible === true) {
+    console.log('3:表示されている状態');
     isCenter();
   }
 });
