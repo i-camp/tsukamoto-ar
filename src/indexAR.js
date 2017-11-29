@@ -1,9 +1,9 @@
 
-const modelMaxNum = 2;
+const modelMaxNum = 3;
 let modelNum = 0;
 const centerX = 0;
 const centerY = 0;
-let meshNames = ['meshName1', 'meshName2'];
+let meshNames = ['meshName1', 'meshName2', 'meshName3'];
 const modesPath = './models/';
 var renderer  = new THREE.WebGLRenderer({
   antialias: true,
@@ -75,6 +75,7 @@ onRenderFcts.push(function(){
 // add an object in the scene
 //////////////////////////////////////////////////////////////////////////////////
 
+// init maker0
 let marker0 = new THREE.Group();  
 // Create a ArMarkerControl
 var markerControls0 = new THREEx.ArMarkerControls(arToolkitContext, marker0, {
@@ -120,7 +121,7 @@ var mtlLoader = new THREE.MTLLoader();
   }, onProgress0, onError );
 });
 
-// init maker2
+// init maker1
 let marker1 = new THREE.Group(); 
 var markerControls1 = new THREEx.ArMarkerControls(arToolkitContext, marker1, {
   type : 'pattern',
@@ -161,6 +162,49 @@ var mtlLoader1 = new THREE.MTLLoader();
   }, onProgress1, onError );
 });
 
+// init maker2
+let marker2 = new THREE.Group(); 
+var markerControls2 = new THREEx.ArMarkerControls(arToolkitContext, marker2, {
+  type : 'pattern',
+  patternUrl : './arjs/data/inu.pat',
+});
+scene.add(marker2);
+
+var onProgress2 = function ( xhr ) {
+  if ( xhr.lengthComputable ) {
+      var percentComplete = xhr.loaded / xhr.total * 100;
+      if (percentComplete >= 100) {
+        modelNum += 1;
+      }
+      console.log( Math.round(percentComplete, 2) + '% downloaded' );
+  }
+};
+
+let mesh2
+var mtlLoader2 = new THREE.MTLLoader();
+  mtlLoader2.setPath(modesPath);
+  mtlLoader2.load( 'LEGO_Man2.mtl', function( materials ) {
+
+  materials.preload();
+
+  var objLoader = new THREE.OBJLoader();
+  objLoader.setMaterials( materials );
+  objLoader.setPath(modesPath);
+  objLoader.load( 'LEGO_Man2.obj', function ( object ) {
+
+  object.scale.x = 0.3;
+  object.scale.y = 0.3;
+  object.scale.z = 0.3;
+  mesh2 = object
+  mesh2.name = meshNames[2];
+  marker2.add(mesh2);
+
+  }, onProgress2, onError );
+});
+
+
+
+
 onRenderFcts.push(function(delta){
   if (markerControls0.object3d.visible === true) {
     console.log('0:表示されている状態');
@@ -170,7 +214,11 @@ onRenderFcts.push(function(delta){
     console.log('1:表示されている状態');
     isCenter();
   }
-})
+  if (markerControls2.object3d.visible === true) {
+    console.log('2:表示されている状態');
+    isCenter();
+  }
+});
 
 function isCenter() {
   var pos = new THREE.Vector3(centerX, centerY, 1);
