@@ -1,8 +1,12 @@
+import EventType from './ValueObjects/EventType'
+import * as PubSub from 'pubsub-js'
 
-const modelMaxNum = 2;
 let modelNum = 0;
 const centerX = 0;
 const centerY = 0;
+let meshNames = ['meshName1', 'meshName2', 'meshName3', 'tsukamotoMesh'];
+const modelMaxNum = meshNames.length;
+const modesPath = './models/';
 var renderer  = new THREE.WebGLRenderer({
   antialias: true,
   alpha: true
@@ -55,7 +59,7 @@ arToolkitContext.init(function onCompleted(){
 onRenderFcts.push(function(){
 
   if( arToolkitSource.ready === false ) return
-  
+
   // load Completed play
   if( modelMaxNum > modelNum ) {
     console.log('loading...');
@@ -73,18 +77,19 @@ onRenderFcts.push(function(){
 // add an object in the scene
 //////////////////////////////////////////////////////////////////////////////////
 
-let marker1 = new THREE.Group();  
+// init maker0
+let marker0 = new THREE.Group();  
 // Create a ArMarkerControl
-var markerControls = new THREEx.ArMarkerControls(arToolkitContext, marker1, {
+var markerControls0 = new THREEx.ArMarkerControls(arToolkitContext, marker0, {
   type : 'pattern',
   patternUrl : './arjs/data/patt.hiro',
 });
 // as we do changeMatrixMode: 'cameraTransformMatrix', start with invisible scene
 // scene.visible = false;
-scene.add(marker1);
+scene.add(marker0);
 
 // obj,mtlを読み込んでいる時の処理
-var onProgress = function ( xhr ) {
+var onProgress0 = function ( xhr ) {
   if ( xhr.lengthComputable ) {
       var percentComplete = xhr.loaded / xhr.total * 100;
       if (percentComplete >= 100) {
@@ -97,36 +102,76 @@ var onProgress = function ( xhr ) {
 // obj,mtlが読み込めなかったときのエラー処理
 var onError = function ( xhr ) {};
 
-let mesh
+let mesh0
 var mtlLoader = new THREE.MTLLoader();
-  mtlLoader.setPath( './model/' );
+  mtlLoader.setPath(modesPath);
   mtlLoader.load( 'LEGO_Man.mtl', function( materials ) {
 
   materials.preload();
 
   var objLoader = new THREE.OBJLoader();
   objLoader.setMaterials( materials );
-  objLoader.setPath( './model/' );
+  objLoader.setPath(modesPath);
   objLoader.load( 'LEGO_Man.obj', function ( object ) {
 
   object.scale.x = 0.2;
   object.scale.y = 0.2;
   object.scale.z = 0.2;
-  mesh = object
-  mesh.name = "testName1";
-  marker1.add(mesh);
-  }, onProgress, onError );
+  mesh0 = object
+  mesh0.name = meshNames[0];
+  marker0.add(mesh0);
+  }, onProgress0, onError );
+});
+
+// init maker1
+let marker1 = new THREE.Group(); 
+var markerControls1 = new THREEx.ArMarkerControls(arToolkitContext, marker1, {
+  type : 'pattern',
+  patternUrl : './arjs/data/patt.kanji',
+});
+scene.add(marker1);
+
+// obj mtl を読み込んでいる時の処理
+var onProgress1 = function ( xhr ) {
+  if ( xhr.lengthComputable ) {
+      var percentComplete = xhr.loaded / xhr.total * 100;
+      if (percentComplete >= 100) {
+        modelNum += 1;
+      }
+      console.log( Math.round(percentComplete, 2) + '% downloaded' );
+  }
+};
+
+let mesh1
+var mtlLoader1 = new THREE.MTLLoader();
+  mtlLoader1.setPath(modesPath);
+  mtlLoader1.load( 'LegoBricks3.mtl', function( materials ) {
+
+  materials.preload();
+
+  var objLoader = new THREE.OBJLoader();
+  objLoader.setMaterials( materials );
+  objLoader.setPath(modesPath);
+  objLoader.load( 'LegoBricks3.obj', function ( object ) {
+
+  object.scale.x = 0.01;
+  object.scale.y = 0.01;
+  object.scale.z = 0.01;
+  mesh1 = object
+  mesh1.name = meshNames[1];
+  marker1.add(mesh1);
+
+  }, onProgress1, onError );
 });
 
 // init maker2
 let marker2 = new THREE.Group(); 
 var markerControls2 = new THREEx.ArMarkerControls(arToolkitContext, marker2, {
   type : 'pattern',
-  patternUrl : './arjs/data/patt.kanji',
+  patternUrl : './arjs/data/inu.pat',
 });
 scene.add(marker2);
 
-// obj mtl を読み込んでいる時の処理
 var onProgress2 = function ( xhr ) {
   if ( xhr.lengthComputable ) {
       var percentComplete = xhr.loaded / xhr.total * 100;
@@ -139,28 +184,75 @@ var onProgress2 = function ( xhr ) {
 
 let mesh2
 var mtlLoader2 = new THREE.MTLLoader();
-  mtlLoader2.setPath( './model/' );
-  mtlLoader2.load( 'LegoBricks3.mtl', function( materials2 ) {
+  mtlLoader2.setPath(modesPath);
+  mtlLoader2.load( 'LEGO_Man2.mtl', function( materials ) {
 
-  materials2.preload();
+  materials.preload();
 
   var objLoader = new THREE.OBJLoader();
-  objLoader.setMaterials( materials2 );
-  objLoader.setPath( './model/' );
-  objLoader.load( 'LegoBricks3.obj', function ( object ) {
+  objLoader.setMaterials( materials );
+  objLoader.setPath(modesPath);
+  objLoader.load( 'LEGO_Man2.obj', function ( object ) {
 
-  object.scale.x = 0.1;
-  object.scale.y = 0.1;
-  object.scale.z = 0.1;
+  object.scale.x = 0.3;
+  object.scale.y = 0.3;
+  object.scale.z = 0.3;
   mesh2 = object
-  mesh2.name = "testName2";
+  mesh2.name = meshNames[2];
   marker2.add(mesh2);
 
   }, onProgress2, onError );
 });
 
+// init maker3
+let marker3 = new THREE.Group(); 
+var markerControls3 = new THREEx.ArMarkerControls(arToolkitContext, marker3, {
+  type : 'pattern',
+  patternUrl : './arjs/data/neko.pat',
+});
+scene.add(marker3);
+
+var onProgress3 = function ( xhr ) {
+  if ( xhr.lengthComputable ) {
+      var percentComplete = xhr.loaded / xhr.total * 100;
+      if (percentComplete >= 100) {
+        modelNum += 1;
+      }
+      console.log( Math.round(percentComplete, 2) + '% downloaded' );
+  }
+};
+
+let mesh3
+var mtlLoader3 = new THREE.MTLLoader();
+  mtlLoader3.setPath(modesPath);
+  mtlLoader3.load( 'tsukamotoModel.mtl', function( materials ) {
+
+  materials.preload();
+
+  var objLoader = new THREE.OBJLoader();
+  objLoader.setMaterials( materials );
+  objLoader.setPath(modesPath);
+  objLoader.load( 'tsukamotoModel.obj', function ( object ) {
+
+  object.scale.x = 0.7;
+  object.scale.y = 0.7;
+  object.scale.z = 0.7;
+  mesh3 = object
+  mesh3.name = meshNames[3];
+  marker3.add(mesh3);
+
+  }, onProgress3, onError );
+});
+
+
+
+
 onRenderFcts.push(function(delta){
-  if (markerControls.object3d.visible === true) {
+  if (markerControls0.object3d.visible === true) {
+    console.log('0:表示されている状態');
+    isCenter();
+  }
+  if (markerControls1.object3d.visible === true) {
     console.log('1:表示されている状態');
     isCenter();
   }
@@ -168,7 +260,11 @@ onRenderFcts.push(function(delta){
     console.log('2:表示されている状態');
     isCenter();
   }
-})
+  if (markerControls3.object3d.visible === true) {
+    console.log('3:表示されている状態');
+    isCenter();
+  }
+});
 
 function isCenter() {
   var pos = new THREE.Vector3(centerX, centerY, 1);
@@ -179,6 +275,10 @@ function isCenter() {
     console.log(hitObj[0].object.parent.name);
     // To Do Event Fire!
     // 一応、配列に名前一覧いれてCheckしてからEvent発火するか?
+    PubSub.subscribe(EventType.shot, e => {
+      PubSub.publish(EventType.isHit, {name: "tsukamotota"});
+    });
+
   }
 }
 
