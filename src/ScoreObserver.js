@@ -26,6 +26,7 @@ export default class ScoreObserver {
       } else {
         this.collection.remove(data.name);
       }
+      console.log(this.collection.score(data.name));
     });
     
     // 1秒間隔で送る
