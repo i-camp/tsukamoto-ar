@@ -6,11 +6,6 @@ import EventType from './ValueObjects/EventType'
 import * as IndexAR from './indexAR.js'
 import * as RestrictIOS from './RestrictIOS.js'
 
-// sample is loaded
-setTimeout(() => {
-  PubSub.publish(EventType.isLoaded);
-}, 3000);
-
 setTimeout(() => {
   PubSub.publish(EventType.openGame);
 }, 5000);

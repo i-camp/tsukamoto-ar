@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "e-party2017",
+    "ignore": [
+      "firebase.json",
+      "node_modules/**",
+      "src/**"
+    ]
+  }
+}
