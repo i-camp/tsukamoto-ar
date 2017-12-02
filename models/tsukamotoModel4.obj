@@ -1,6 +1,6 @@
 # Blender v2.79 (sub 0) OBJ File: ''
 # www.blender.org
-mtllib model.mtl
+mtllib tsukamotoModel4.mtl
 o tukamoto_model
 v 0.058186 0.040231 -0.422311
 v 0.077897 0.041912 -0.421094
