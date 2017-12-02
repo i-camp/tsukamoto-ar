@@ -14,7 +14,7 @@ export default class ScoreCollection {
   _setName(name) {
     if (this.scores[name] === undefined) {
       this.scores[name] = {
-        puls: 0,
+        plus: 0,
         minus: 0
       };
     }
@@ -22,7 +22,7 @@ export default class ScoreCollection {
 
   add(name) {
     this._setName(name);
-    this.scores[name].puls++;
+    this.scores[name].plus++;
   }
 
   remove(name) {

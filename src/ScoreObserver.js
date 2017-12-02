@@ -43,7 +43,7 @@ export default class ScoreObserver {
           let currentGame = gameObserver.nowGameRound();
           database.ref(`/commits/${currentGame}`).push().set({
             target: name,
-            puls: score.puls,
+            plus: score.plus,
             minus: score.minus
           });
         }
