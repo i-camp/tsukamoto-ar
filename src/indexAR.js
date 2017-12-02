@@ -1,10 +1,12 @@
 import EventType from './ValueObjects/EventType'
 import * as PubSub from 'pubsub-js'
 
+let isLoadedPublished = false;
 let modelNum = 0;
 const centerX = 0;
 const centerY = 0;
-let meshNames = ['meshName1', 'meshName2', 'meshName3', 'tsukamotoMesh'];
+let meshNames = ['meshName1', 'meshName2', 'meshName3', 'tsukamotoMesh1', 'tsukamotoMesh2', 
+                 'tsukamotoMesh3', 'tsukamotoMesh4', 'tsukamotoMesh5', 'tsukamotoMesh6'];
 const modelMaxNum = meshNames.length;
 const modesPath = './models/';
 var renderer  = new THREE.WebGLRenderer({
@@ -18,14 +20,14 @@ renderer.domElement.style.top = '0px'
 renderer.domElement.style.left = '0px'
 document.body.appendChild( renderer.domElement );
 // init scene and camera
-var scene = new THREE.Scene();
-var camera = new THREE.Camera();
+let scene = new THREE.Scene();
+let camera = new THREE.Camera();
 scene.add(camera);
-var light = new THREE.DirectionalLight(0xffffff);
+let light = new THREE.DirectionalLight(0xffffff);
 light.position.set(0, 0, 2);
 scene.add(light);    
 // array of functions for the rendering loop
-var onRenderFcts= [];
+let onRenderFcts= [];
 
 // handle arToolkitSource
 var arToolkitSource = new THREEx.ArToolkitSource({
@@ -65,13 +67,20 @@ onRenderFcts.push(function(){
     console.log('loading...');
     return
   } else {
-     // console.log('play');
+    gameStarted();
   } 
 
   arToolkitContext.update( arToolkitSource.domElement )
   // update scene.visible if the marker is seen
   // scene.visible = camera.visible
 });
+
+function gameStarted() {
+  if (!isLoadedPublished) {
+    PubSub.publish(EventType.isLoaded);
+    isLoadedPublished = true;
+  }
+}
     
 //////////////////////////////////////////////////////////////////////////////////
 // add an object in the scene
@@ -80,7 +89,7 @@ onRenderFcts.push(function(){
 // init maker0
 let marker0 = new THREE.Group();  
 // Create a ArMarkerControl
-var markerControls0 = new THREEx.ArMarkerControls(arToolkitContext, marker0, {
+let markerControls0 = new THREEx.ArMarkerControls(arToolkitContext, marker0, {
   type : 'pattern',
   patternUrl : './arjs/data/patt.hiro',
 });
@@ -89,9 +98,9 @@ var markerControls0 = new THREEx.ArMarkerControls(arToolkitContext, marker0, {
 scene.add(marker0);
 
 // obj,mtlを読み込んでいる時の処理
-var onProgress0 = function ( xhr ) {
+let onProgress0 = function ( xhr ) {
   if ( xhr.lengthComputable ) {
-      var percentComplete = xhr.loaded / xhr.total * 100;
+      let percentComplete = xhr.loaded / xhr.total * 100;
       if (percentComplete >= 100) {
         modelNum += 1;
       }
@@ -100,16 +109,17 @@ var onProgress0 = function ( xhr ) {
 };
 
 // obj,mtlが読み込めなかったときのエラー処理
-var onError = function ( xhr ) {};
+let onError = function ( xhr ) {};
 
+// load LEGO_Man.obj of mesh0
 let mesh0
-var mtlLoader = new THREE.MTLLoader();
+let mtlLoader = new THREE.MTLLoader();
   mtlLoader.setPath(modesPath);
   mtlLoader.load( 'LEGO_Man.mtl', function( materials ) {
 
   materials.preload();
 
-  var objLoader = new THREE.OBJLoader();
+  let objLoader = new THREE.OBJLoader();
   objLoader.setMaterials( materials );
   objLoader.setPath(modesPath);
   objLoader.load( 'LEGO_Man.obj', function ( object ) {
@@ -127,14 +137,14 @@ var mtlLoader = new THREE.MTLLoader();
 let marker1 = new THREE.Group(); 
 var markerControls1 = new THREEx.ArMarkerControls(arToolkitContext, marker1, {
   type : 'pattern',
-  patternUrl : './arjs/data/patt.kanji',
+  patternUrl : './arjs/data/marker02.pat',
 });
 scene.add(marker1);
 
 // obj mtl を読み込んでいる時の処理
-var onProgress1 = function ( xhr ) {
+let onProgress1 = function ( xhr ) {
   if ( xhr.lengthComputable ) {
-      var percentComplete = xhr.loaded / xhr.total * 100;
+      let percentComplete = xhr.loaded / xhr.total * 100;
       if (percentComplete >= 100) {
         modelNum += 1;
       }
@@ -142,14 +152,15 @@ var onProgress1 = function ( xhr ) {
   }
 };
 
+// load LegoBricks3.obj mesh1
 let mesh1
-var mtlLoader1 = new THREE.MTLLoader();
+let mtlLoader1 = new THREE.MTLLoader();
   mtlLoader1.setPath(modesPath);
   mtlLoader1.load( 'LegoBricks3.mtl', function( materials ) {
 
   materials.preload();
 
-  var objLoader = new THREE.OBJLoader();
+  let objLoader = new THREE.OBJLoader();
   objLoader.setMaterials( materials );
   objLoader.setPath(modesPath);
   objLoader.load( 'LegoBricks3.obj', function ( object ) {
@@ -166,15 +177,15 @@ var mtlLoader1 = new THREE.MTLLoader();
 
 // init maker2
 let marker2 = new THREE.Group(); 
-var markerControls2 = new THREEx.ArMarkerControls(arToolkitContext, marker2, {
+let markerControls2 = new THREEx.ArMarkerControls(arToolkitContext, marker2, {
   type : 'pattern',
-  patternUrl : './arjs/data/inu.pat',
+  patternUrl : './arjs/data/marker03.pat',
 });
 scene.add(marker2);
 
-var onProgress2 = function ( xhr ) {
+let onProgress2 = function ( xhr ) {
   if ( xhr.lengthComputable ) {
-      var percentComplete = xhr.loaded / xhr.total * 100;
+      let percentComplete = xhr.loaded / xhr.total * 100;
       if (percentComplete >= 100) {
         modelNum += 1;
       }
@@ -182,14 +193,15 @@ var onProgress2 = function ( xhr ) {
   }
 };
 
+// load LEGO_Man2.obj of mesh2
 let mesh2
-var mtlLoader2 = new THREE.MTLLoader();
+let mtlLoader2 = new THREE.MTLLoader();
   mtlLoader2.setPath(modesPath);
   mtlLoader2.load( 'LEGO_Man2.mtl', function( materials ) {
 
   materials.preload();
 
-  var objLoader = new THREE.OBJLoader();
+  let objLoader = new THREE.OBJLoader();
   objLoader.setMaterials( materials );
   objLoader.setPath(modesPath);
   objLoader.load( 'LEGO_Man2.obj', function ( object ) {
@@ -206,15 +218,15 @@ var mtlLoader2 = new THREE.MTLLoader();
 
 // init maker3
 let marker3 = new THREE.Group(); 
-var markerControls3 = new THREEx.ArMarkerControls(arToolkitContext, marker3, {
+let markerControls3 = new THREEx.ArMarkerControls(arToolkitContext, marker3, {
   type : 'pattern',
-  patternUrl : './arjs/data/neko.pat',
+  patternUrl : './arjs/data/marker04.pat',
 });
 scene.add(marker3);
 
-var onProgress3 = function ( xhr ) {
+let onProgress3 = function ( xhr ) {
   if ( xhr.lengthComputable ) {
-      var percentComplete = xhr.loaded / xhr.total * 100;
+      let percentComplete = xhr.loaded / xhr.total * 100;
       if (percentComplete >= 100) {
         modelNum += 1;
       }
@@ -222,14 +234,15 @@ var onProgress3 = function ( xhr ) {
   }
 };
 
+// load mesh3 of marker3
 let mesh3
-var mtlLoader3 = new THREE.MTLLoader();
+let mtlLoader3 = new THREE.MTLLoader();
   mtlLoader3.setPath(modesPath);
   mtlLoader3.load( 'tsukamotoModel.mtl', function( materials ) {
 
   materials.preload();
 
-  var objLoader = new THREE.OBJLoader();
+  let objLoader = new THREE.OBJLoader();
   objLoader.setMaterials( materials );
   objLoader.setPath(modesPath);
   objLoader.load( 'tsukamotoModel.obj', function ( object ) {
@@ -244,6 +257,201 @@ var mtlLoader3 = new THREE.MTLLoader();
   }, onProgress3, onError );
 });
 
+// init marker4
+let marker4 = new THREE.Group(); 
+let markerControls4 = new THREEx.ArMarkerControls(arToolkitContext, marker4, {
+  type : 'pattern',
+  patternUrl : './arjs/data/marker05.pat',
+});
+scene.add(marker4);
+
+let onProgress4 = function ( xhr ) {
+  if ( xhr.lengthComputable ) {
+      let percentComplete = xhr.loaded / xhr.total * 100;
+      if (percentComplete >= 100) {
+        modelNum += 1;
+      }
+      console.log( Math.round(percentComplete, 2) + '% downloaded' );
+  }
+};
+
+// load tsukamotoModel2.obj of mesh4
+let mesh4
+let mtlLoader4 = new THREE.MTLLoader();
+  mtlLoader4.setPath(modesPath);
+  mtlLoader4.load( 'tsukamotoModel2.mtl', function( materials ) {
+
+  materials.preload();
+
+  let objLoader = new THREE.OBJLoader();
+  objLoader.setMaterials( materials );
+  objLoader.setPath(modesPath);
+  objLoader.load( 'tsukamotoModel2.obj', function ( object ) {
+
+  object.scale.x = 0.8;
+  object.scale.y = 0.8;
+  object.scale.z = 0.8;
+  mesh4 = object
+  mesh4.name = meshNames[4];
+  marker4.add(mesh4);
+
+  }, onProgress4, onError );
+});
+
+// init marker5
+let marker5 = new THREE.Group(); 
+let markerControls5 = new THREEx.ArMarkerControls(arToolkitContext, marker5, {
+  type : 'pattern',
+  patternUrl : './arjs/data/marker06.pat',
+});
+scene.add(marker5);
+
+let onProgress5 = function ( xhr ) {
+  if ( xhr.lengthComputable ) {
+      let percentComplete = xhr.loaded / xhr.total * 100;
+      if (percentComplete >= 100) {
+        modelNum += 1;
+      }
+      console.log( Math.round(percentComplete, 2) + '% downloaded' );
+  }
+};
+
+// load tsukamotoModel3.obj of mesh5 
+let mesh5
+let mtlLoader5 = new THREE.MTLLoader();
+  mtlLoader5.setPath(modesPath);
+  mtlLoader5.load( 'tsukamotoModel3.mtl', function( materials ) {
+
+  materials.preload();
+
+  let objLoader = new THREE.OBJLoader();
+  objLoader.setMaterials( materials );
+  objLoader.setPath(modesPath);
+  objLoader.load( 'tsukamotoModel3.obj', function ( object ) {
+
+  object.scale.x = 0.9;
+  object.scale.y = 0.9;
+  object.scale.z = 0.9;
+  mesh5 = object
+  mesh5.name = meshNames[5];
+  marker5.add(mesh5);
+
+  }, onProgress5, onError );
+});
+
+// init marker6
+let marker6 = new THREE.Group(); 
+let markerControls6 = new THREEx.ArMarkerControls(arToolkitContext, marker6, {
+  type : 'pattern',
+  patternUrl : './arjs/data/marker07.pat',
+});
+scene.add(marker6);
+
+let onProgress6 = function ( xhr ) {
+  if ( xhr.lengthComputable ) {
+      let percentComplete = xhr.loaded / xhr.total * 100;
+      if (percentComplete >= 100) {
+        modelNum += 1;
+      }
+      console.log( Math.round(percentComplete, 2) + '% downloaded' );
+  }
+};
+
+// load tsukamotoModel4.obj of mesh6
+let mesh6
+let mtlLoader6 = new THREE.MTLLoader();
+  mtlLoader6.setPath(modesPath);
+  mtlLoader6.load( 'tsukamotoModel4.mtl', function( materials ) {
+
+  materials.preload();
+
+  let objLoader = new THREE.OBJLoader();
+  objLoader.setMaterials( materials );
+  objLoader.setPath(modesPath);
+  objLoader.load( 'tsukamotoModel4.obj', function ( object ) {
+
+  mesh6 = object
+  mesh6.name = meshNames[6];
+  marker6.add(mesh6);
+
+  }, onProgress5, onError );
+});
+
+// init marker7
+let marker7 = new THREE.Group(); 
+let markerControls7 = new THREEx.ArMarkerControls(arToolkitContext, marker7, {
+  type : 'pattern',
+  patternUrl : './arjs/data/marker08.pat',
+});
+scene.add(marker7);
+
+let onProgress7 = function ( xhr ) {
+  if ( xhr.lengthComputable ) {
+      let percentComplete = xhr.loaded / xhr.total * 100;
+      if (percentComplete >= 100) {
+        modelNum += 1;
+      }
+      console.log( Math.round(percentComplete, 2) + '% downloaded' );
+  }
+};
+
+// load tsukamotoModel5.obj of mesh7
+let mesh7
+let mtlLoader7 = new THREE.MTLLoader();
+  mtlLoader7.setPath(modesPath);
+  mtlLoader7.load( 'tsukamotoModel5.mtl', function( materials ) {
+
+  materials.preload();
+
+  let objLoader = new THREE.OBJLoader();
+  objLoader.setMaterials( materials );
+  objLoader.setPath(modesPath);
+  objLoader.load( 'tsukamotoModel5.obj', function ( object ) {
+
+  mesh7 = object
+  mesh7.name = meshNames[7];
+  marker7.add(mesh7);
+
+  }, onProgress5, onError );
+});
+
+// init marker8
+let marker8 = new THREE.Group(); 
+let markerControls8 = new THREEx.ArMarkerControls(arToolkitContext, marker8, {
+  type : 'pattern',
+  patternUrl : './arjs/data/marker09.pat',
+});
+scene.add(marker8);
+
+let onProgress8 = function ( xhr ) {
+  if ( xhr.lengthComputable ) {
+      let percentComplete = xhr.loaded / xhr.total * 100;
+      if (percentComplete >= 100) {
+        modelNum += 1;
+      }
+      console.log( Math.round(percentComplete, 2) + '% downloaded' );
+  }
+};
+
+// load model.obj of marker8
+let mesh8
+let mtlLoader8 = new THREE.MTLLoader();
+  mtlLoader8.setPath(modesPath);
+  mtlLoader8.load( 'model.mtl', function( materials ) {
+
+  materials.preload();
+
+  let objLoader = new THREE.OBJLoader();
+  objLoader.setMaterials( materials );
+  objLoader.setPath(modesPath);
+  objLoader.load( 'model.obj', function ( object ) {
+
+  mesh8 = object
+  mesh8.name = meshNames[8];
+  marker8.add(mesh8);
+
+  }, onProgress8, onError );
+});
 
 
 
