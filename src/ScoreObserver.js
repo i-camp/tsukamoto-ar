@@ -1,3 +1,4 @@
+import * as PubSub from 'pubsub-js'
 import database from './firebaseDatabase'
 import ScoreCollection from './ScoreCollection'
 import ShootType from './ValueObjects/ShootType'
