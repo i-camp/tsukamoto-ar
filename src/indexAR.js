@@ -103,6 +103,7 @@ let onProgress0 = function ( xhr ) {
 // obj,mtlが読み込めなかったときのエラー処理
 let onError = function ( xhr ) {};
 
+// load LEGO_Man.obj of mesh0
 let mesh0
 let mtlLoader = new THREE.MTLLoader();
   mtlLoader.setPath(modesPath);
@@ -143,7 +144,7 @@ let onProgress1 = function ( xhr ) {
   }
 };
 
-// load mesh1 of marker1
+// load LegoBricks3.obj mesh1
 let mesh1
 let mtlLoader1 = new THREE.MTLLoader();
   mtlLoader1.setPath(modesPath);
@@ -184,7 +185,7 @@ let onProgress2 = function ( xhr ) {
   }
 };
 
-// load mesh2 of marker2
+// load LEGO_Man2.obj of mesh2
 let mesh2
 let mtlLoader2 = new THREE.MTLLoader();
   mtlLoader2.setPath(modesPath);
@@ -252,7 +253,7 @@ let mtlLoader3 = new THREE.MTLLoader();
 let marker4 = new THREE.Group(); 
 let markerControls4 = new THREEx.ArMarkerControls(arToolkitContext, marker4, {
   type : 'pattern',
-  patternUrl : './arjs/data/marker04.pat',
+  patternUrl : './arjs/data/marker05.pat',
 });
 scene.add(marker4);
 
@@ -266,18 +267,18 @@ let onProgress4 = function ( xhr ) {
   }
 };
 
-// load mesh4 of marker4
+// load tsukamotoModel2.obj of mesh4
 let mesh4
 let mtlLoader4 = new THREE.MTLLoader();
   mtlLoader4.setPath(modesPath);
-  mtlLoader4.load( 'tsukamotoModel.mtl', function( materials ) {
+  mtlLoader4.load( 'tsukamotoModel2.mtl', function( materials ) {
 
   materials.preload();
 
   let objLoader = new THREE.OBJLoader();
   objLoader.setMaterials( materials );
   objLoader.setPath(modesPath);
-  objLoader.load( 'tsukamotoModel.obj', function ( object ) {
+  objLoader.load( 'tsukamotoModel2.obj', function ( object ) {
 
   object.scale.x = 0.8;
   object.scale.y = 0.8;
@@ -293,7 +294,7 @@ let mtlLoader4 = new THREE.MTLLoader();
 let marker5 = new THREE.Group(); 
 let markerControls5 = new THREEx.ArMarkerControls(arToolkitContext, marker5, {
   type : 'pattern',
-  patternUrl : './arjs/data/marker05.pat',
+  patternUrl : './arjs/data/marker06.pat',
 });
 scene.add(marker5);
 
@@ -307,18 +308,18 @@ let onProgress5 = function ( xhr ) {
   }
 };
 
-// load mesh5 of marker5
+// load tsukamotoModel3.obj of mesh5 
 let mesh5
 let mtlLoader5 = new THREE.MTLLoader();
   mtlLoader5.setPath(modesPath);
-  mtlLoader5.load( 'tsukamotoModel.mtl', function( materials ) {
+  mtlLoader5.load( 'tsukamotoModel3.mtl', function( materials ) {
 
   materials.preload();
 
   let objLoader = new THREE.OBJLoader();
   objLoader.setMaterials( materials );
   objLoader.setPath(modesPath);
-  objLoader.load( 'tsukamotoModel.obj', function ( object ) {
+  objLoader.load( 'tsukamotoModel3.obj', function ( object ) {
 
   object.scale.x = 0.9;
   object.scale.y = 0.9;
@@ -334,7 +335,7 @@ let mtlLoader5 = new THREE.MTLLoader();
 let marker6 = new THREE.Group(); 
 let markerControls6 = new THREEx.ArMarkerControls(arToolkitContext, marker6, {
   type : 'pattern',
-  patternUrl : './arjs/data/marker06.pat',
+  patternUrl : './arjs/data/marker07.pat',
 });
 scene.add(marker6);
 
@@ -348,18 +349,18 @@ let onProgress6 = function ( xhr ) {
   }
 };
 
-// load mesh6 of marker6
+// load tsukamotoModel4.obj of mesh6
 let mesh6
 let mtlLoader6 = new THREE.MTLLoader();
   mtlLoader6.setPath(modesPath);
-  mtlLoader6.load( 'tsukamotoModel.mtl', function( materials ) {
+  mtlLoader6.load( 'tsukamotoModel4.mtl', function( materials ) {
 
   materials.preload();
 
   let objLoader = new THREE.OBJLoader();
   objLoader.setMaterials( materials );
   objLoader.setPath(modesPath);
-  objLoader.load( 'tsukamotoModel.obj', function ( object ) {
+  objLoader.load( 'tsukamotoModel4.obj', function ( object ) {
 
   mesh6 = object
   mesh6.name = meshNames[6];
@@ -372,7 +373,7 @@ let mtlLoader6 = new THREE.MTLLoader();
 let marker7 = new THREE.Group(); 
 let markerControls7 = new THREEx.ArMarkerControls(arToolkitContext, marker7, {
   type : 'pattern',
-  patternUrl : './arjs/data/marker07.pat',
+  patternUrl : './arjs/data/marker08.pat',
 });
 scene.add(marker7);
 
@@ -386,18 +387,18 @@ let onProgress7 = function ( xhr ) {
   }
 };
 
-// load mesh7 of marker7
+// load tsukamotoModel5.obj of mesh7
 let mesh7
 let mtlLoader7 = new THREE.MTLLoader();
   mtlLoader7.setPath(modesPath);
-  mtlLoader7.load( 'tsukamotoModel.mtl', function( materials ) {
+  mtlLoader7.load( 'tsukamotoModel5.mtl', function( materials ) {
 
   materials.preload();
 
   let objLoader = new THREE.OBJLoader();
   objLoader.setMaterials( materials );
   objLoader.setPath(modesPath);
-  objLoader.load( 'tsukamotoModel.obj', function ( object ) {
+  objLoader.load( 'tsukamotoModel5.obj', function ( object ) {
 
   mesh7 = object
   mesh7.name = meshNames[7];
@@ -410,7 +411,7 @@ let mtlLoader7 = new THREE.MTLLoader();
 let marker8 = new THREE.Group(); 
 let markerControls8 = new THREEx.ArMarkerControls(arToolkitContext, marker8, {
   type : 'pattern',
-  patternUrl : './arjs/data/marker08.pat',
+  patternUrl : './arjs/data/marker09.pat',
 });
 scene.add(marker8);
 
@@ -424,18 +425,18 @@ let onProgress8 = function ( xhr ) {
   }
 };
 
-// load mesh8 of marker8
+// load model.obj of marker8
 let mesh8
 let mtlLoader8 = new THREE.MTLLoader();
   mtlLoader8.setPath(modesPath);
-  mtlLoader8.load( 'tsukamotoModel.mtl', function( materials ) {
+  mtlLoader8.load( 'model.mtl', function( materials ) {
 
   materials.preload();
 
   let objLoader = new THREE.OBJLoader();
   objLoader.setMaterials( materials );
   objLoader.setPath(modesPath);
-  objLoader.load( 'tsukamotoModel.obj', function ( object ) {
+  objLoader.load( 'model.obj', function ( object ) {
 
   mesh8 = object
   mesh8.name = meshNames[8];
@@ -443,46 +444,6 @@ let mtlLoader8 = new THREE.MTLLoader();
 
   }, onProgress8, onError );
 });
-
-// init marker9
-let marker9 = new THREE.Group(); 
-let markerControls9 = new THREEx.ArMarkerControls(arToolkitContext, marker9, {
-  type : 'pattern',
-  patternUrl : './arjs/data/marker09.pat',
-});
-scene.add(marker9);
-
-let onProgress9 = function ( xhr ) {
-  if ( xhr.lengthComputable ) {
-      let percentComplete = xhr.loaded / xhr.total * 100;
-      if (percentComplete >= 100) {
-        modelNum += 1;
-      }
-      console.log( Math.round(percentComplete, 2) + '% downloaded' );
-  }
-};
-
-// load mesh9 of marker9
-let mesh9
-let mtlLoader9 = new THREE.MTLLoader();
-  mtlLoader9.setPath(modesPath);
-  mtlLoader9.load( 'tsukamotoModel.mtl', function( materials ) {
-
-  materials.preload();
-
-  let objLoader = new THREE.OBJLoader();
-  objLoader.setMaterials( materials );
-  objLoader.setPath(modesPath);
-  objLoader.load( 'tsukamotoModel.obj', function ( object ) {
-
-  mesh9 = object
-  mesh9.name = meshNames[9];
-  marker9.add(mesh9);
-
-  }, onProgress9, onError );
-});
-
-
 
 
 
