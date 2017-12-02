@@ -266,19 +266,19 @@ onRenderFcts.push(function(delta){
   }
 });
 
+let isDisplay = false;
+let objectName;
+
 function isCenter() {
   var pos = new THREE.Vector3(centerX, centerY, 1);
   pos.unproject(camera);
   var ray = new THREE.Raycaster(camera.position, pos.sub(camera.position).normalize());
   var hitObj = ray.intersectObjects(scene.children, true);
-  if(hitObj.length > 0) {
-    console.log(hitObj[0].object.parent.name);
-    // To Do Event Fire!
-    // 一応、配列に名前一覧いれてCheckしてからEvent発火するか?
-    PubSub.subscribe(EventType.shot, e => {
-      PubSub.publish(EventType.isHit, {name: "tsukamotota"});
-    });
-
+  if (hitObj.length > 0) {
+    isDisplay = true;
+    objectName = hitObj[0].object.parent.name;
+  } else {
+    isDisplay = false;
   }
 }
 
@@ -299,4 +299,11 @@ requestAnimationFrame(function animate(nowMsec){
   onRenderFcts.forEach(function(onRenderFct){
     onRenderFct(deltaMsec/1000, nowMsec/1000)
   })
+});
+
+// Event
+PubSub.subscribe(EventType.shot, e => {
+  if (isDisplay) {
+    PubSub.publish(EventType.isHit, {name: objectName});
+  }
 });

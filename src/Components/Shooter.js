@@ -1,25 +1,24 @@
-import Shooter from './Shooter.html'
-import ShootType from '../ValueObjects/ShootType'
-import database from '../firebaseDatabase'
 import audio from '../Util/Audio'
 import * as PubSub from 'pubsub-js'
+import Shooter from './Shooter.html'
+import ScoreObserver from '../ScoreObserver'
+import ShootType from '../ValueObjects/ShootType'
 import EventType from '../ValueObjects/EventType'
 
 const ShooterComponent = new Shooter({
   target: document.querySelector('.shooter'),
 });
 
+const Observer = new ScoreObserver();
+Observer.observe();
+
 const ChangeSound = new Audio("./assets/change.mp3");
 const ShotSound   = new Audio("./assets/shot.mp3");
-
-let attack   = 0;
-let recovery = 0;
 
 ShooterComponent.set({
   type: ShootType.add,
   addClass: true,
-  removeClass: false,
-  count: attack - recovery
+  removeClass: false
 });
 
 ShooterComponent.on('switch', e => {
@@ -33,11 +32,13 @@ ShooterComponent.on('switch', e => {
       addClass: true,
       removeClass: false
     };
+    Observer.add();
   } else {
     flg = {
       addClass: false,
       removeClass: true
     };
+    Observer.remove();
   }
   ShooterComponent.set(flg);
 });
@@ -46,35 +47,5 @@ ShooterComponent.on('shoot', e => {
   ShotSound.play();
   PubSub.publish(EventType.shot);
 });
-
-PubSub.subscribe(EventType.isHit, (e, data) => {
-  console.log(data);//consoleでの確認OK
-  if (ShooterComponent._state.type === ShootType.add) {
-    attack++;
-  } else {
-    recovery++;
-  }
-  ShooterComponent.set({ count: attack - recovery });
-});
-
-// 1秒間隔で送る
-setInterval(
-  () => {
-  // 変更がない場合
-  if (attack === 0 && recovery === 0) {
-    return;
-  }
-
-  // TODO 格納するユーザーを可変にする
-  database.ref('/0/tsukamotota').push().set({
-    attack: attack,
-    recovery: recovery
-  });
-
-  // reset
-  attack   = 0;
-  recovery = 0;
-  
-}, 1000);
 
 export default ShooterComponent;
