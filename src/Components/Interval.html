@@ -1,0 +1,71 @@
+{{#if isClosed}}
+<section class="closing cssanimation bounceInTop">
+  <div class="innner">
+    <h2><span>C</span>LOSED</h2>
+    <p>次回のゲームまでお待ち下さい</p>
+  </div>
+</section>
+{{/if}}
+
+{{#if isOpend}}
+<section class="opening">
+  <h2 class="cssanimation pushReleaseTo"><span>G</span>AME START</h2>
+</section>
+{{/if}}
+
+<style>
+
+  .bounceInTop { animation-name: bounceInTop }
+  @keyframes bounceInTop {
+      0% { transform: translate3d(0, -300%, 0) }
+      58% { transform: translate3d(0, 27px, 0) }
+      73% { transform: translate3d(0, -12px, 0) }
+      88% { transform: translate3d(0, 7px, 0) }
+  }
+
+  .pushReleaseTo { animation-name: pushReleaseTo }
+  @keyframes pushReleaseTo {
+      50% { transform: scale(.5, .5) }
+      to {
+          transform: scale(5, 5);
+          opacity: 0;
+      }
+  }
+
+  h2 {
+    font-family:"Terminator Real NFI";
+  }
+  p, h2 {
+    color: #ffffff;
+    text-align: center;
+  }
+  h2 > span {
+    color: #f20000;
+  }
+  .closing {
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    display: block;
+    position: absolute;
+    z-index: 900;
+    background-color: rgb(32, 32, 32);
+  }
+  .closing > .innner,
+  .opening {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .opening > h2{
+    font-size: 3em;
+  }
+</style>
+
+<script>
+</script>
