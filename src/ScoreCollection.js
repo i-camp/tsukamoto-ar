@@ -14,20 +14,20 @@ export default class ScoreCollection {
   _setName(name) {
     if (this.scores[name] === undefined) {
       this.scores[name] = {
-        attack: 0,
-        recovery: 0
+        puls: 0,
+        minus: 0
       };
     }
   }
 
   add(name) {
     this._setName(name);
-    this.scores[name].attack++;
+    this.scores[name].puls++;
   }
 
   remove(name) {
     this._setName(name);
-    this.scores[name].recovery--;
+    this.scores[name].minus++;
   }
 
   refresh() {

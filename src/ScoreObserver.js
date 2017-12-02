@@ -3,6 +3,10 @@ import database from './firebaseDatabase'
 import ScoreCollection from './ScoreCollection'
 import ShootType from './ValueObjects/ShootType'
 import EventType from './ValueObjects/EventType'
+import GameObserver from './GameObserver'
+
+const gameObserver = new GameObserver();
+gameObserver.observe();
 
 export default class ScoreObserver {
 
@@ -36,14 +40,16 @@ export default class ScoreObserver {
       Object.keys(this.collection.scores).forEach(name => {
         let score = this.collection.score(name);
         if (score.attack !== 0 || score.recovery !== 0) {
-          database.ref(`/0/${name}`).push().set({
-            attack: score.attack,
-            recovery: score.recovery
+          let currentGame = gameObserver.nowGameRound();
+          database.ref(`/commits/${currentGame}`).push().set({
+            target: name,
+            puls: score.puls,
+            minus: score.minus
           });
         }
       });
       this.collection.refresh();
-    }, 1000);
+    }, 10000);
 
   }
 }
