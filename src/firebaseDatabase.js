@@ -2,11 +2,11 @@ import * as firebase from 'firebase';
 import 'firebase/database';
 
 const app  = firebase.initializeApp({
-    apiKey: "AIzaSyDNYQeL3jpu_JBsbjqj4wjuHu7YaMPJIho",
-    authDomain: "t-shooter.firebaseapp.com",
-    databaseURL: "https://t-shooter.firebaseio.com",
-    projectId: "t-shooter",
-    storageBucket: "t-shooter.appspot.com",
+    apiKey: "AIzaSyApU8XjBHp5GjMgb1HLOYi4UFmKyhNQP-I",
+    authDomain: "e-party2017.firebaseapp.com",
+    databaseURL: "https://e-party2017.firebaseio.com",
+    projectId: "e-party2017",
+    storageBucket: "gs://e-party2017.appspot.com/",
 });
 const database = app.database();
 
