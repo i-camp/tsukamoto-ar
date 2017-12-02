@@ -39,7 +39,7 @@ export default class ScoreObserver {
       () => {
       Object.keys(this.collection.scores).forEach(name => {
         let score = this.collection.score(name);
-        if (score.attack !== 0 || score.recovery !== 0) {
+        if (score.plus > 0 || score.minus > 0) {
           let currentGame = gameObserver.nowGameRound();
           database.ref(`/commits/${currentGame}`).push().set({
             target: name,
