@@ -3,7 +3,6 @@ branches:
   only:
   - master
 node_js:
-  - iojs
   - '8'
 cache: yarn
 install:
