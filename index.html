@@ -13,16 +13,30 @@
   <script src="./arjs/build/ar.js"></script>
   <script src="index.js" defer async></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
+  <link rel="stylesheet" href="./css/cssanimation.min.css">
   <link rel="manifest" href="manifest.json">
   <style>
+    /* @font-face kit by Fonts2u (http://www.fonts2u.com) */
+    @font-face {
+      font-family:"Terminator Real NFI";
+      src:url("./fonts/terminator_real_nfi.eot?") format("eot"),
+        url("./fonts/terminator_real_nfi.woff") format("woff"),
+        url("./fonts/terminator_real_nfi.ttf") format("truetype"),
+        url("./fonts/terminator_real_nfi.svg#TerminatorRealNFI") format("svg");
+      font-weight:normal;
+      font-style:normal;
+    }
     html, body {
+      font-family:-apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI","Noto Sans Japanese","ヒラギノ角ゴ ProN W3", Meiryo, sans-serif;
       width: 100vw;
       height: 100vh;
+      overflow: hidden;
     }
   </style>
 </head>
 <body>
   <section class="load"></section>
+  <section class="interval"></section>
   <section class="shooter"></section>
 </body>
 </html>
