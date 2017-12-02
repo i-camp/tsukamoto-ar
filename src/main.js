@@ -6,6 +6,6 @@ import * as IndexAR from './indexAR.js'
 import * as RestrictIOS from './RestrictIOS.js'
 
 // sample is loaded
-setTimeout(() => {
-  PubSub.publish(EventType.isLoaded);
-}, 5000);
+//setTimeout(() => {
+  //PubSub.publish(EventType.isLoaded);
+//}, 5000);

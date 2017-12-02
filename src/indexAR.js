@@ -1,6 +1,7 @@
 import EventType from './ValueObjects/EventType'
 import * as PubSub from 'pubsub-js'
 
+let isLoadedPublished = false;
 let modelNum = 0;
 const centerX = 0;
 const centerY = 0;
@@ -66,13 +67,20 @@ onRenderFcts.push(function(){
     console.log('loading...');
     return
   } else {
-     // console.log('play');
+    gameStarted();
   } 
 
   arToolkitContext.update( arToolkitSource.domElement )
   // update scene.visible if the marker is seen
   // scene.visible = camera.visible
 });
+
+function gameStarted() {
+  if (!isLoadedPublished) {
+    PubSub.publish(EventType.isLoaded);
+    isLoadedPublished = true;
+  }
+}
     
 //////////////////////////////////////////////////////////////////////////////////
 // add an object in the scene
