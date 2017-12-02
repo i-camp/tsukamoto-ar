@@ -1,5 +1,5 @@
 /* 上下スクロール無効 */
-window.addEventListener('touchmove', function(event) {
+window.addEventListener('touchmove', event => {
   event.preventDefault();
 });
 /* ピッチインピッチアウトによる拡大縮小を禁止 */
