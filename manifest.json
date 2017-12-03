@@ -1,34 +1,37 @@
 {
+  "lang": "ja",
+  "name": "T-Shooter",
   "short_name": "T-Shooter",
-  "name": "AR Shooting Game.",
+  "description": "AR Shooting Game.",
   "icons": [
     {
-      "src": "/assets/t-shooter-128.png",
+      "src": "assets/t-shooter-128.png",
       "type": "image/png",
       "sizes": "128x128"
     },
     {
-      "src": "/assets/t-shooter-144.png",
+      "src": "assets/t-shooter-144.png",
       "type": "image/png",
       "sizes": "144x144"
     },
     {
-      "src": "/assets/t-shooter-192.png",
+      "src": "assets/t-shooter-192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "/assets/t-shooter-256.png",
+      "src": "assets/t-shooter-256.png",
       "type": "image/png",
       "sizes": "256x256"
     },
     {
-      "src": "/assets/t-shooter-512.png",
+      "src": "assets/t-shooter-512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
   ],
-  "start_url": "/",
+  "scope": "/",
+  "start_url": "./?utm_source=web_app_manifest",
   "display": "fullscreen",
   "orientation": "landscape",
   "background_color": "#FFFFFF",
