@@ -165,9 +165,9 @@ let mtlLoader1 = new THREE.MTLLoader();
   objLoader.setPath(modesPath);
   objLoader.load( 'LegoBricks3.obj', function ( object ) {
 
-  object.scale.x = 0.01;
-  object.scale.y = 0.01;
-  object.scale.z = 0.01;
+  object.scale.x = 0.5;
+  object.scale.y = 0.5;
+  object.scale.z = 0.5;
   mesh1 = object
   mesh1.name = meshNames[1];
   marker1.add(mesh1);
