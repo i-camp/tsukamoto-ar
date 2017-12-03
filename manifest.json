@@ -3,27 +3,27 @@
   "name": "AR Shooting Game.",
   "icons": [
     {
-      "src": "./assets/t-shooter-128.js",
+      "src": "/assets/t-shooter-128.png",
       "type": "image/png",
       "sizes": "128x128"
     },
     {
-      "src": "./assets/t-shooter-144.js",
+      "src": "/assets/t-shooter-144.png",
       "type": "image/png",
       "sizes": "144x144"
     },
     {
-      "src": "./assets/t-shooter-192.js",
+      "src": "/assets/t-shooter-192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "./assets/t-shooter-256.js",
+      "src": "/assets/t-shooter-256.png",
       "type": "image/png",
       "sizes": "256x256"
     },
     {
-      "src": "./assets/t-shooter-512.js",
+      "src": "/assets/t-shooter-512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
