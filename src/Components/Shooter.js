@@ -18,7 +18,8 @@ const ShotSound   = new Audio("./assets/shot.mp3");
 ShooterComponent.set({
   type: ShootType.add,
   addClass: true,
-  removeClass: false
+  removeClass: false,
+  fire: false
 });
 
 ShooterComponent.on('switch', e => {
@@ -45,6 +46,10 @@ ShooterComponent.on('switch', e => {
 
 ShooterComponent.on('shoot', e => {
   ShotSound.play();
+  ShooterComponent.set({fire: true});
+  setTimeout(() => {
+    ShooterComponent.set({fire: false});
+  }, 100);
   PubSub.publish(EventType.shot);
 });
 

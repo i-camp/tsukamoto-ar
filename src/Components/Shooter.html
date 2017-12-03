@@ -4,9 +4,17 @@
     <button class="shooter-switch__button--remove shooter-switch__button {{ removeClass ? 'active' : '' }}" on:click='switchRemove()'>-</button>
   </div>
 </div>
+<div class="shotgun {{ addClass ? 'black' : 'white' }} {{ fire ? '' : 'cssanimation hu__hu__'}}"></div>
+<div class="shotgun--shot {{ fire ? 'fire' : '' }}"></div>
 <div class="shooter-area" on:click='shoot()'></div>
 
 <style>
+
+  .hu__hu__ { animation: hu__hu__ infinite 2s ease-in-out }
+  @keyframes hu__hu__ {
+      50% { transform: translateY(3%) }
+  }
+
   p {
     margin: 0;
   }
@@ -39,9 +47,42 @@
     top: 0;
     left: 0;
     display: block;
-    position: absolute;
+    position: fixed;
     z-index: 10;
-    background: no-repeat center/5% url('./assets/aiming.svg');
+    background: no-repeat center/10% url('./assets/aiming.svg');
+  }
+  .shotgun {
+    width: 100vw;
+    height: 50vh;
+    display: block;
+    position: fixed;
+    z-index: 9;
+    bottom: 0;
+    right: 0;
+    background-size: 50vh;
+    background-repeat: no-repeat;
+    background-position: 80% top;
+  }
+  .shotgun.black {
+    background-image: url('./assets/shotgun_black.png');
+  }
+  .shotgun.white {
+    background-image: url('./assets/shotgun_white.png');
+  }
+  .shotgun--shot {
+    width: 100vw;
+    height: 50vh;
+    display: block;
+    position: fixed;
+    z-index: 8;
+    bottom: 0;
+    right: 0;
+    background-size: 50vh;
+    background-repeat: no-repeat;
+    background-position: 80% top;
+  }
+  .shotgun--shot.fire {
+    background-image: url('./assets/shotgun_fire.png');
   }
 </style>
 
