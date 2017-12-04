@@ -1,3 +1,11 @@
+<h2>{{ title }}</h2>
+
+{{#if hit}}
+<div class="hit cssanimation coolHorizontalShake">
+  <p>Hit!</p>
+</div>
+{{/if}}
+
 <div class="shooter-switch">
   <div class="shooter-switch__inner">
     <button class="shooter-switch__button--add shooter-switch__button {{ addClass ? 'active' : '' }}" on:click='switchAdd()'>+</button>
@@ -15,9 +23,34 @@
       50% { transform: translateY(3%) }
   }
 
+  .coolHorizontalShake { animation-name: coolHorizontalShake; animation-iteration-count: infinite }
+  @keyframes coolHorizontalShake {
+      3%, 21%, 39%, 57%, 74%, 92% { transform: translateX(5px) }
+      6%, 24%, 42%, 60%, 77%, 95% { transform: translateX(3px) }
+      9%, 27%, 45%, 63%, 80%, 98% { transform: translateX(-5px) }
+  }
+
   p {
     margin: 0;
   }
+
+  .hit {
+    top: 60%;
+    width: 100vw;
+    text-align: center;
+    position: fixed;
+    z-index: 8;
+  }
+  .hit > p {
+    font-size: 2em;
+    color: #ff0000;
+    font-family:"Terminator Real NFI";
+    text-shadow: 2px 2px 0 #000,
+      -2px 2px 0 #000,
+      2px -2px 0 #000,
+      -2px -2px 0 #000;
+  }
+
   .shooter-switch {
     bottom: 10px;
     right: 10px;

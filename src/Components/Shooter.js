@@ -4,6 +4,7 @@ import Shooter from './Shooter.html'
 import ScoreObserver from '../ScoreObserver'
 import ShootType from '../ValueObjects/ShootType'
 import EventType from '../ValueObjects/EventType'
+import { setTimeout } from 'timers';
 
 const ShooterComponent = new Shooter({
   target: document.querySelector('.shooter'),
@@ -19,7 +20,9 @@ ShooterComponent.set({
   type: ShootType.add,
   addClass: true,
   removeClass: false,
-  fire: false
+  fire: false,
+  hit: false,
+  title: ""
 });
 
 ShooterComponent.on('switch', e => {
@@ -51,6 +54,21 @@ ShooterComponent.on('shoot', e => {
     ShooterComponent.set({fire: false});
   }, 100);
   PubSub.publish(EventType.shot);
+});
+
+// ゲームタイトル
+PubSub.subscribe(EventType.openGame, (e, data) => {
+  if (data) {
+    ShooterComponent.set({title: data.name});
+  }
+});
+
+// ヒット
+PubSub.subscribe(EventType.isHit, (e, data) => {
+  ShooterComponent.set({hit: true});
+  setTimeout(() => {
+    ShooterComponent.set({hit: false});
+  }, 250);
 });
 
 export default ShooterComponent;
