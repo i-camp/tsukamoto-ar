@@ -91,7 +91,7 @@ let marker0 = new THREE.Group();
 // Create a ArMarkerControl
 let markerControls0 = new THREEx.ArMarkerControls(arToolkitContext, marker0, {
   type : 'pattern',
-  patternUrl : './arjs/data/patt.hiro',
+  patternUrl : './arjs/data/marker01.pat',
 });
 // as we do changeMatrixMode: 'cameraTransformMatrix', start with invisible scene
 // scene.visible = false;
@@ -115,18 +115,15 @@ let onError = function ( xhr ) {};
 let mesh0
 let mtlLoader = new THREE.MTLLoader();
   mtlLoader.setPath(modesPath);
-  mtlLoader.load( 'LEGO_Man.mtl', function( materials ) {
+  mtlLoader.load( 'yasu3000.mtl', function( materials ) {
 
   materials.preload();
 
   let objLoader = new THREE.OBJLoader();
   objLoader.setMaterials( materials );
   objLoader.setPath(modesPath);
-  objLoader.load( 'LEGO_Man.obj', function ( object ) {
+  objLoader.load( 'yasu3000.obj', function ( object ) {
 
-  object.scale.x = 0.2;
-  object.scale.y = 0.2;
-  object.scale.z = 0.2;
   mesh0 = object
   mesh0.name = meshNames[0];
   marker0.add(mesh0);
@@ -156,14 +153,14 @@ let onProgress1 = function ( xhr ) {
 let mesh1
 let mtlLoader1 = new THREE.MTLLoader();
   mtlLoader1.setPath(modesPath);
-  mtlLoader1.load( 'LegoBricks3.mtl', function( materials ) {
+  mtlLoader1.load( 'yasu6000texture.mtl', function( materials ) {
 
   materials.preload();
 
   let objLoader = new THREE.OBJLoader();
   objLoader.setMaterials( materials );
   objLoader.setPath(modesPath);
-  objLoader.load( 'LegoBricks3.obj', function ( object ) {
+  objLoader.load( 'yasu6000texture.obj', function ( object ) {
 
   object.scale.x = 0.5;
   object.scale.y = 0.5;
@@ -457,19 +454,30 @@ let mtlLoader8 = new THREE.MTLLoader();
 
 onRenderFcts.push(function(delta){
   if (markerControls0.object3d.visible === true) {
-    console.log('0:表示されている状態');
     isCenter();
   }
   if (markerControls1.object3d.visible === true) {
-    console.log('1:表示されている状態');
     isCenter();
   }
   if (markerControls2.object3d.visible === true) {
-    console.log('2:表示されている状態');
     isCenter();
   }
   if (markerControls3.object3d.visible === true) {
-    console.log('3:表示されている状態');
+    isCenter();
+  }
+  if (markerControls4.object3d.visible === true) {
+    isCenter();
+  }
+  if (markerControls5.object3d.visible === true) {
+    isCenter();
+  }
+  if (markerControls6.object3d.visible === true) {
+    isCenter();
+  }
+  if (markerControls7.object3d.visible === true) {
+    isCenter();
+  }
+  if (markerControls8.object3d.visible === true) {
     isCenter();
   }
 });
