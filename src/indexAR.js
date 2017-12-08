@@ -111,24 +111,18 @@ let onProgress0 = function ( xhr ) {
 // obj,mtlが読み込めなかったときのエラー処理
 let onError = function ( xhr ) {};
 
-// load LEGO_Man.obj of mesh0
+// load mesh0
+let dracoLoader0 = new THREE.DRACOLoader('darcojs/loaders/darco/');
 let mesh0
-let mtlLoader = new THREE.MTLLoader();
-  mtlLoader.setPath(modesPath);
-  mtlLoader.load( 'yasu3000.mtl', function( materials ) {
-
-  materials.preload();
-
-  let objLoader = new THREE.OBJLoader();
-  objLoader.setMaterials( materials );
-  objLoader.setPath(modesPath);
-  objLoader.load( 'yasu3000.obj', function ( object ) {
-
-  mesh0 = object
+dracoLoader0.load( './models/yasudrc20000.drc', function ( geometry ) {
+  geometry.computeVertexNormals();
+  var material = new THREE.MeshStandardMaterial( { vertexColors: THREE.VertexColors } );
+  mesh0 = new THREE.Mesh( geometry, material );
+  mesh0.castShadow = true;
+  mesh0.receiveShadow = true;
   mesh0.name = meshNames[0];
   marker0.add(mesh0);
-  }, onProgress0, onError );
-});
+}, onProgress0, onError );
 
 // init maker1
 let marker1 = new THREE.Group(); 
@@ -149,28 +143,18 @@ let onProgress1 = function ( xhr ) {
   }
 };
 
-// load LegoBricks3.obj mesh1
+// load mesh1
+let dracoLoader1 = new THREE.DRACOLoader('darcojs/loaders/darco/');
 let mesh1
-let mtlLoader1 = new THREE.MTLLoader();
-  mtlLoader1.setPath(modesPath);
-  mtlLoader1.load( 'yasu6000texture.mtl', function( materials ) {
-
-  materials.preload();
-
-  let objLoader = new THREE.OBJLoader();
-  objLoader.setMaterials( materials );
-  objLoader.setPath(modesPath);
-  objLoader.load( 'yasu6000texture.obj', function ( object ) {
-
-  object.scale.x = 0.5;
-  object.scale.y = 0.5;
-  object.scale.z = 0.5;
-  mesh1 = object
+dracoLoader1.load( './models/yasudrc20001.drc', function ( geometry ) {
+  geometry.computeVertexNormals();
+  var material = new THREE.MeshStandardMaterial( { vertexColors: THREE.VertexColors } );
+  mesh1 = new THREE.Mesh( geometry, material );
+  mesh1.castShadow = true;
+  mesh1.receiveShadow = true;
   mesh1.name = meshNames[1];
   marker1.add(mesh1);
-
-  }, onProgress1, onError );
-});
+}, onProgress1, onError );
 
 // init maker2
 let marker2 = new THREE.Group(); 
@@ -190,28 +174,18 @@ let onProgress2 = function ( xhr ) {
   }
 };
 
-// load LEGO_Man2.obj of mesh2
+// load mesh2
+let dracoLoader2 = new THREE.DRACOLoader('darcojs/loaders/darco/');
 let mesh2
-let mtlLoader2 = new THREE.MTLLoader();
-  mtlLoader2.setPath(modesPath);
-  mtlLoader2.load( 'LEGO_Man2.mtl', function( materials ) {
-
-  materials.preload();
-
-  let objLoader = new THREE.OBJLoader();
-  objLoader.setMaterials( materials );
-  objLoader.setPath(modesPath);
-  objLoader.load( 'LEGO_Man2.obj', function ( object ) {
-
-  object.scale.x = 0.3;
-  object.scale.y = 0.3;
-  object.scale.z = 0.3;
-  mesh2 = object
+dracoLoader2.load( './models/yasudrc20002.drc', function ( geometry ) {
+  geometry.computeVertexNormals();
+  var material = new THREE.MeshStandardMaterial( { vertexColors: THREE.VertexColors } );
+  mesh2 = new THREE.Mesh( geometry, material );
+  mesh2.castShadow = true;
+  mesh2.receiveShadow = true;
   mesh2.name = meshNames[2];
   marker2.add(mesh2);
-
-  }, onProgress2, onError );
-});
+}, onProgress2, onError );
 
 // init maker3
 let marker3 = new THREE.Group(); 
@@ -232,27 +206,17 @@ let onProgress3 = function ( xhr ) {
 };
 
 // load mesh3 of marker3
+let dracoLoader3 = new THREE.DRACOLoader('darcojs/loaders/darco/');
 let mesh3
-let mtlLoader3 = new THREE.MTLLoader();
-  mtlLoader3.setPath(modesPath);
-  mtlLoader3.load( 'tsukamotoModel.mtl', function( materials ) {
-
-  materials.preload();
-
-  let objLoader = new THREE.OBJLoader();
-  objLoader.setMaterials( materials );
-  objLoader.setPath(modesPath);
-  objLoader.load( 'tsukamotoModel.obj', function ( object ) {
-
-  object.scale.x = 0.7;
-  object.scale.y = 0.7;
-  object.scale.z = 0.7;
-  mesh3 = object
+dracoLoader3.load( './models/yasudrc20003.drc', function ( geometry ) {
+  geometry.computeVertexNormals();
+  var material = new THREE.MeshStandardMaterial( { vertexColors: THREE.VertexColors } );
+  mesh3 = new THREE.Mesh( geometry, material );
+  mesh3.castShadow = true;
+  mesh3.receiveShadow = true;
   mesh3.name = meshNames[3];
   marker3.add(mesh3);
-
-  }, onProgress3, onError );
-});
+}, onProgress3, onError );
 
 // init marker4
 let marker4 = new THREE.Group(); 
@@ -272,28 +236,18 @@ let onProgress4 = function ( xhr ) {
   }
 };
 
-// load tsukamotoModel2.obj of mesh4
+// load mesh4
+let dracoLoader4 = new THREE.DRACOLoader('darcojs/loaders/darco/');
 let mesh4
-let mtlLoader4 = new THREE.MTLLoader();
-  mtlLoader4.setPath(modesPath);
-  mtlLoader4.load( 'tsukamotoModel2.mtl', function( materials ) {
-
-  materials.preload();
-
-  let objLoader = new THREE.OBJLoader();
-  objLoader.setMaterials( materials );
-  objLoader.setPath(modesPath);
-  objLoader.load( 'tsukamotoModel2.obj', function ( object ) {
-
-  object.scale.x = 0.8;
-  object.scale.y = 0.8;
-  object.scale.z = 0.8;
-  mesh4 = object
+dracoLoader4.load( './models/yasudrc20004.drc', function ( geometry ) {
+  geometry.computeVertexNormals();
+  var material = new THREE.MeshStandardMaterial( { vertexColors: THREE.VertexColors } );
+  mesh4 = new THREE.Mesh( geometry, material );
+  mesh4.castShadow = true;
+  mesh4.receiveShadow = true;
   mesh4.name = meshNames[4];
   marker4.add(mesh4);
-
-  }, onProgress4, onError );
-});
+}, onProgress4, onError );
 
 // init marker5
 let marker5 = new THREE.Group(); 
@@ -313,28 +267,19 @@ let onProgress5 = function ( xhr ) {
   }
 };
 
-// load tsukamotoModel3.obj of mesh5 
+// load mesh5 
+let dracoLoader5 = new THREE.DRACOLoader('darcojs/loaders/darco/');
 let mesh5
-let mtlLoader5 = new THREE.MTLLoader();
-  mtlLoader5.setPath(modesPath);
-  mtlLoader5.load( 'tsukamotoModel3.mtl', function( materials ) {
-
-  materials.preload();
-
-  let objLoader = new THREE.OBJLoader();
-  objLoader.setMaterials( materials );
-  objLoader.setPath(modesPath);
-  objLoader.load( 'tsukamotoModel3.obj', function ( object ) {
-
-  object.scale.x = 0.9;
-  object.scale.y = 0.9;
-  object.scale.z = 0.9;
-  mesh5 = object
+dracoLoader5.load( './models/yasudrc20005.drc', function ( geometry ) {
+  geometry.computeVertexNormals();
+  var material = new THREE.MeshStandardMaterial( { vertexColors: THREE.VertexColors } );
+  mesh5 = new THREE.Mesh( geometry, material );
+  mesh5.castShadow = true;
+  mesh5.receiveShadow = true;
   mesh5.name = meshNames[5];
   marker5.add(mesh5);
+}, onProgress5, onError );
 
-  }, onProgress5, onError );
-});
 
 // init marker6
 let marker6 = new THREE.Group(); 
@@ -354,25 +299,18 @@ let onProgress6 = function ( xhr ) {
   }
 };
 
-// load tsukamotoModel4.obj of mesh6
+// load mesh6
+let dracoLoader6 = new THREE.DRACOLoader('darcojs/loaders/darco/');
 let mesh6
-let mtlLoader6 = new THREE.MTLLoader();
-  mtlLoader6.setPath(modesPath);
-  mtlLoader6.load( 'tsukamotoModel4.mtl', function( materials ) {
-
-  materials.preload();
-
-  let objLoader = new THREE.OBJLoader();
-  objLoader.setMaterials( materials );
-  objLoader.setPath(modesPath);
-  objLoader.load( 'tsukamotoModel4.obj', function ( object ) {
-
-  mesh6 = object
+dracoLoader6.load( './models/yasudrc20006.drc', function ( geometry ) {
+  geometry.computeVertexNormals();
+  var material = new THREE.MeshStandardMaterial( { vertexColors: THREE.VertexColors } );
+  mesh6 = new THREE.Mesh( geometry, material );
+  mesh6.castShadow = true;
+  mesh6.receiveShadow = true;
   mesh6.name = meshNames[6];
   marker6.add(mesh6);
-
-  }, onProgress6, onError );
-});
+}, onProgress6, onError );
 
 // init marker7
 let marker7 = new THREE.Group(); 
@@ -392,25 +330,18 @@ let onProgress7 = function ( xhr ) {
   }
 };
 
-// load tsukamotoModel5.obj of mesh7
+// load mesh7
+let dracoLoader7 = new THREE.DRACOLoader('darcojs/loaders/darco/');
 let mesh7
-let mtlLoader7 = new THREE.MTLLoader();
-  mtlLoader7.setPath(modesPath);
-  mtlLoader7.load( 'tsukamotoModel5.mtl', function( materials ) {
-
-  materials.preload();
-
-  let objLoader = new THREE.OBJLoader();
-  objLoader.setMaterials( materials );
-  objLoader.setPath(modesPath);
-  objLoader.load( 'tsukamotoModel5.obj', function ( object ) {
-
-  mesh7 = object
+dracoLoader7.load( './models/yasudrc20007.drc', function ( geometry ) {
+  geometry.computeVertexNormals();
+  var material = new THREE.MeshStandardMaterial( { vertexColors: THREE.VertexColors } );
+  mesh7 = new THREE.Mesh( geometry, material );
+  mesh7.castShadow = true;
+  mesh7.receiveShadow = true;
   mesh7.name = meshNames[7];
   marker7.add(mesh7);
-
-  }, onProgress7, onError );
-});
+}, onProgress7, onError );
 
 // init marker8
 let marker8 = new THREE.Group(); 
@@ -431,24 +362,18 @@ let onProgress8 = function ( xhr ) {
 };
 
 // load model.obj of marker8
+let dracoLoader8 = new THREE.DRACOLoader('darcojs/loaders/darco/');
 let mesh8
-let mtlLoader8 = new THREE.MTLLoader();
-  mtlLoader8.setPath(modesPath);
-  mtlLoader8.load( 'model.mtl', function( materials ) {
+dracoLoader8.load( './models/yasudrc20008.drc', function ( geometry ) {
 
-  materials.preload();
-
-  let objLoader = new THREE.OBJLoader();
-  objLoader.setMaterials( materials );
-  objLoader.setPath(modesPath);
-  objLoader.load( 'model.obj', function ( object ) {
-
-  mesh8 = object
+  geometry.computeVertexNormals();
+  var material = new THREE.MeshStandardMaterial( { vertexColors: THREE.VertexColors } );
+  mesh8 = new THREE.Mesh( geometry, material );
+  mesh8.castShadow = true;
+  mesh8.receiveShadow = true;
   mesh8.name = meshNames[8];
   marker8.add(mesh8);
-
-  }, onProgress8, onError );
-});
+}, onProgress8, onError );
 
 
 
@@ -492,7 +417,8 @@ function isCenter() {
   var hitObj = ray.intersectObjects(scene.children, true);
   if (hitObj.length > 0) {
     isDisplay = true;
-    objectName = hitObj[0].object.parent.name;
+    console.log(hitObj[0].object.name);
+    objectName = hitObj[0].object.name;
   } else {
     isDisplay = false;
   }
