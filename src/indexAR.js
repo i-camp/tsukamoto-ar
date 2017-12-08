@@ -371,7 +371,7 @@ let mtlLoader6 = new THREE.MTLLoader();
   mesh6.name = meshNames[6];
   marker6.add(mesh6);
 
-  }, onProgress5, onError );
+  }, onProgress6, onError );
 });
 
 // init marker7
@@ -409,7 +409,7 @@ let mtlLoader7 = new THREE.MTLLoader();
   mesh7.name = meshNames[7];
   marker7.add(mesh7);
 
-  }, onProgress5, onError );
+  }, onProgress7, onError );
 });
 
 // init marker8
