@@ -1,10 +1,14 @@
-<h2>{{ title }}</h2>
+<h2 class="game-title">{{ title }}</h2>
 
 {{#if hit}}
-<div class="hit cssanimation coolHorizontalShake">
-  <p>Hit!</p>
+<div class="hit">
+  <p class="cssanimation coolHorizontalShake">Hit!</p>
 </div>
 {{/if}}
+
+<div class="gun-charge">
+  <div class="wait {{ enableShot ? 'enable' : '' }}"></div>
+</div>
 
 <div class="shooter-switch">
   <div class="shooter-switch__inner">
@@ -30,25 +34,68 @@
       9%, 27%, 45%, 63%, 80%, 98% { transform: translateX(-5px) }
   }
 
+  .game-title {
+    color: #ffffff;
+    font-size: 1em;
+    font-weight: normal;
+    padding: 5px 10px;
+    top: 5%;
+    left: 5%;
+    position: fixed;
+    z-index: 9;
+    background: rgba(0, 0, 0, 0.3);
+    transform: rotate3d(1,2,0,20deg);
+    text-shadow: 1px 1px 0 #000,
+      -1px 1px 0 #000,
+      1px -1px 0 #000,
+      -1px -1px 0 #000;
+  }
+
   p {
     margin: 0;
   }
 
   .hit {
-    top: 60%;
+    top: 40%;
     width: 100vw;
     text-align: center;
     position: fixed;
     z-index: 8;
   }
   .hit > p {
-    font-size: 2em;
+    font-size: 1.5em;
     color: #ff0000;
     font-family:"Terminator Real NFI";
-    text-shadow: 2px 2px 0 #000,
-      -2px 2px 0 #000,
-      2px -2px 0 #000,
-      -2px -2px 0 #000;
+    text-shadow: 1px 1px 0 #000,
+      -1px 1px 0 #000,
+      1px -1px 0 #000,
+      -1px -1px 0 #000;
+  }
+
+  .gun-charge {
+    width: 20%;
+    height: 30px;
+    position: fixed;
+    bottom: 5%;
+    left: 5%;
+    z-index: 8;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.3);
+    transform: rotate3d(-1,2,0,20deg);
+  }
+
+  .gun-charge > .wait {
+    width: 100%;
+    height: 30px;
+    display: block;
+    background: rgba(255, 0, 0, 0.5);
+    transition: all 175ms 0s;
+    z-index: 9;
+    position: relative;
+  }
+
+  .gun-charge > .wait.enable {
+    transform: translateX(-150px) scaleX(0);
   }
 
   .shooter-switch {
@@ -122,7 +169,9 @@
 <script>
   import ShootType from '../ValueObjects/ShootType'
 
-  const isVibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
+  
+
+  let enableShot = true;
   
   export default {
     methods: {
@@ -137,9 +186,6 @@
         });
       },
       shoot() {
-        if (isVibrate){
-          navigator.vibrate(100);
-        }
         this.fire('shoot', {});
       }
     }

@@ -6,6 +6,8 @@ import ShootType from '../ValueObjects/ShootType'
 import EventType from '../ValueObjects/EventType'
 import { setTimeout } from 'timers';
 
+const isVibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
+
 const ShooterComponent = new Shooter({
   target: document.querySelector('.shooter'),
 });
@@ -22,6 +24,7 @@ ShooterComponent.set({
   removeClass: false,
   fire: false,
   hit: false,
+  enableShot: true,
   title: ""
 });
 
@@ -48,6 +51,18 @@ ShooterComponent.on('switch', e => {
 });
 
 ShooterComponent.on('shoot', e => {
+  if (!ShooterComponent._state.enableShot) {
+    return;
+  }
+  ShooterComponent.set({enableShot: false});
+  setTimeout(() => {
+    ShooterComponent.set({enableShot: true});
+  }, 350);
+
+  if (isVibrate){
+    navigator.vibrate(100);
+  }
+
   ShotSound.play();
   ShooterComponent.set({fire: true});
   setTimeout(() => {
