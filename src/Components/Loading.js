@@ -6,10 +6,6 @@ const LoadingComponent = new Loading({
   target: document.querySelector('.load'),
 });
 
-LoadingComponent.set({
-  isLoading: true
-});
-
 PubSub.subscribe(EventType.isLoaded, e => {
   LoadingComponent.set({
     isLoading: false

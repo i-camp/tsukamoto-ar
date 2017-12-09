@@ -1,0 +1,68 @@
+<section class="section">
+  <div class="container targets">
+    {{#if targets.length > 0 }}
+      
+      {{#each targets as target }}
+      <div class="card target" data-order="{{ target.order ? target.order : '1' }}">
+        <div class="rank">{{ target.order ? target.order : '-' }}</div>
+        <div class="card-content">
+          <div class="media">
+            <div class="media-left">
+              <figure class="image is-48x48">
+                <img src="{{ target.picUrl }}" alt="{{ target.name }}">
+              </figure>
+            </div>
+            <div class="media-content">
+              <p class="title is-4">{{ target.name }}</p>
+              <p class="subtitle is-6">Score: {{ target.score }}</p>
+            </div>
+          </div>
+      
+          <div class="content">
+            <progress class="progress is-success" value="{{ score(target.plus, target.minus) }}" max="100"></progress>
+          </div>
+        </div>
+      </div>
+      {{/each}}
+
+    {{else}}
+    <article class="message is-danger">
+      <div class="message-body">
+        開始までお待ち下さい
+      </div>
+    </article>
+    {{/if}}
+  </div>
+</section>
+
+<style>
+  .card {
+    width: 100%;
+  }
+  .progress::-webkit-progress-bar {
+      background-color: #00aaff;
+  }
+  .rank {
+    z-index: 10;
+    border-radius: 100px;
+    background: #ccc;
+    display: block;
+    width: 30px;
+    height: 30px;
+    padding: 6px 10px;
+    position: absolute;
+    line-height: 1em;
+    left: 10px;
+    top: 10px;
+  }
+</style>
+
+<script>
+  export default {
+    data() {
+      return {
+        targets: []
+      }
+    }
+  };
+</script>

@@ -50,11 +50,6 @@
       1px -1px 0 #000,
       -1px -1px 0 #000;
   }
-  @media (min-width: 500px) {
-    .game-title {
-      transform: rotate3d(1,2,0,20deg);
-    }
-  }
 
   p {
     margin: 0;
@@ -86,7 +81,6 @@
     z-index: 8;
     overflow: hidden;
     background: no-repeat -15px/80% rgba(0, 0, 0, 0.3) url('./assets/shotgun.svg');
-    transform: rotate3d(-1,2,0,20deg);
   }
 
   .gun-charge > .wait {
@@ -100,7 +94,7 @@
   }
 
   .gun-charge > .wait.enable {
-    transform: translateX(-150px) scaleX(0);
+    width: 0;
   }
 
   .shooter-switch {
@@ -188,6 +182,16 @@
   import ShootType from '../ValueObjects/ShootType'
   
   export default {
+    data() {
+      return {
+        addClass: true,
+        removeClass: false,
+        fire: false,
+        hit: false,
+        enableShot: true,
+        title: ""
+      }
+    },
     methods: {
       switchAdd() {
         this.fire('switch', {
