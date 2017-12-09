@@ -2,13 +2,15 @@ var webpack = require('webpack');
 var path    = require('path');
 
 module.exports = {
-  entry: [
-    './src/main.js',
-  ],
+  context: path.resolve(__dirname, "./src"),
+  entry: {
+    "index": './main.js',
+    "score_board": './score_board.js',
+  },
   output: {
     path: path.resolve(__dirname, './'),
     publicPath: '/',
-    filename: 'index.js'
+    filename: '[name].js'
   },
   module: {
     rules: [
