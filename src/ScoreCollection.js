@@ -12,7 +12,7 @@ export default class ScoreCollection {
   }
 
   _setName(name) {
-    if (this.scores[name] === undefined) {
+    if (typeof this.scores[name] === "undefined") {
       this.scores[name] = {
         plus: 0,
         minus: 0

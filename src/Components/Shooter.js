@@ -4,6 +4,9 @@ import Shooter from './Shooter.html'
 import ScoreObserver from '../ScoreObserver'
 import ShootType from '../ValueObjects/ShootType'
 import EventType from '../ValueObjects/EventType'
+import { setTimeout } from 'timers';
+
+const isVibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
 
 const ShooterComponent = new Shooter({
   target: document.querySelector('.shooter'),
@@ -18,7 +21,11 @@ const ShotSound   = new Audio("./assets/shot.mp3");
 ShooterComponent.set({
   type: ShootType.add,
   addClass: true,
-  removeClass: false
+  removeClass: false,
+  fire: false,
+  hit: false,
+  enableShot: true,
+  title: ""
 });
 
 ShooterComponent.on('switch', e => {
@@ -44,8 +51,39 @@ ShooterComponent.on('switch', e => {
 });
 
 ShooterComponent.on('shoot', e => {
+  if (!ShooterComponent._state.enableShot) {
+    return;
+  }
+  ShooterComponent.set({enableShot: false});
+  setTimeout(() => {
+    ShooterComponent.set({enableShot: true});
+  }, 350);
+
+  if (isVibrate){
+    navigator.vibrate(100);
+  }
+
   ShotSound.play();
+  ShooterComponent.set({fire: true});
+  setTimeout(() => {
+    ShooterComponent.set({fire: false});
+  }, 100);
   PubSub.publish(EventType.shot);
+});
+
+// ゲームタイトル
+PubSub.subscribe(EventType.openGame, (e, data) => {
+  if (data) {
+    ShooterComponent.set({title: data.name});
+  }
+});
+
+// ヒット
+PubSub.subscribe(EventType.isHit, (e, data) => {
+  ShooterComponent.set({hit: true});
+  setTimeout(() => {
+    ShooterComponent.set({hit: false});
+  }, 250);
 });
 
 export default ShooterComponent;
