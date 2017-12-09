@@ -12,10 +12,11 @@
 
 <div class="shooter-switch">
   <div class="shooter-switch__inner">
-    <button class="shooter-switch__button--add shooter-switch__button {{ addClass ? 'active' : '' }}" on:click='switchAdd()'>+</button>
-    <button class="shooter-switch__button--remove shooter-switch__button {{ removeClass ? 'active' : '' }}" on:click='switchRemove()'>-</button>
+    <button class="shooter-switch__button--add shooter-switch__button {{ addClass ? 'active' : '' }}" on:click='switchAdd()'></button>
+    <button class="shooter-switch__button--remove shooter-switch__button {{ removeClass ? 'active' : '' }}" on:click='switchRemove()'></button>
   </div>
 </div>
+
 <div class="shotgun {{ addClass ? 'black' : 'white' }} {{ fire ? '' : 'cssanimation hu__hu__'}}"></div>
 <div class="shotgun--shot {{ fire ? 'fire' : '' }}"></div>
 <div class="shooter-area" on:click='shoot()'></div>
@@ -44,11 +45,15 @@
     position: fixed;
     z-index: 9;
     background: rgba(0, 0, 0, 0.3);
-    transform: rotate3d(1,2,0,20deg);
     text-shadow: 1px 1px 0 #000,
       -1px 1px 0 #000,
       1px -1px 0 #000,
       -1px -1px 0 #000;
+  }
+  @media (min-width: 500px) {
+    .game-title {
+      transform: rotate3d(1,2,0,20deg);
+    }
   }
 
   p {
@@ -80,7 +85,7 @@
     left: 5%;
     z-index: 8;
     overflow: hidden;
-    background: rgba(0, 0, 0, 0.3);
+    background: no-repeat -15px/80% rgba(0, 0, 0, 0.3) url('./assets/shotgun.svg');
     transform: rotate3d(-1,2,0,20deg);
   }
 
@@ -104,23 +109,29 @@
     position: absolute;
     z-index: 100;
   }
-  .shooter-switch__inner {
-    display: flex;
-  }
   .shooter-switch__button {
     font-size: 2rem;
     border: none;
-    width: 50px;
-    height: 50px;
+    width: 80px;
+    height: 80px;
     display: block;
-    background-color: #dfdfdf;
+    outline: none;
+    border-radius: 100px;
+    transition: all 100ms 0s ease-out;
+    transform: scale(0.8);
+    box-shadow: 5px 5px 5px rgba(0,0,0,0.6);
   }
-  .shooter-switch__button--add.active {
-    background-color: #40e220;
+  .shooter-switch__button--add {
+    background: no-repeat center/80% url('./assets/bugfix.svg') #ffffff;
   }
+  .shooter-switch__button--remove {
+    background: no-repeat center/80% url('./assets/faster.svg') #ffffff;
+  }
+  .shooter-switch__button--add.active,
   .shooter-switch__button--remove.active {
-    background-color: #ff4040;
+    transform: scale(1);
   }
+
   .shooter-area {
     width: 100vw;
     height: 100vh;
@@ -141,7 +152,7 @@
     right: 0;
     background-size: 50vh;
     background-repeat: no-repeat;
-    background-position: 80% top;
+    background-position: 80% bottom;
   }
   .shotgun.black {
     background-image: url('./assets/shotgun_black.png');
@@ -159,7 +170,14 @@
     right: 0;
     background-size: 50vh;
     background-repeat: no-repeat;
-    background-position: 80% top;
+    background-position: 80% bottom;
+  }
+  @media (max-width: 500px) {
+    .shotgun,
+    .shotgun--shot {
+      background-size: 40vh;
+      background-position: 120% bottom;
+    }
   }
   .shotgun--shot.fire {
     background-image: url('./assets/shotgun_fire.png');
@@ -168,10 +186,6 @@
 
 <script>
   import ShootType from '../ValueObjects/ShootType'
-
-  
-
-  let enableShot = true;
   
   export default {
     methods: {
