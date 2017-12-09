@@ -146,7 +146,7 @@ let onProgress1 = function ( xhr ) {
 // load mesh1
 let dracoLoader1 = new THREE.DRACOLoader('darcojs/loaders/darco/');
 let mesh1
-dracoLoader1.load( './models/yasudrc20001.drc', function ( geometry ) {
+dracoLoader1.load( './models/fujimaki.drc', function ( geometry ) {
   geometry.computeVertexNormals();
   var material = new THREE.MeshStandardMaterial( { vertexColors: THREE.VertexColors } );
   mesh1 = new THREE.Mesh( geometry, material );
@@ -333,7 +333,7 @@ let onProgress7 = function ( xhr ) {
 // load mesh7
 let dracoLoader7 = new THREE.DRACOLoader('darcojs/loaders/darco/');
 let mesh7
-dracoLoader7.load( './models/yasudrc20007.drc', function ( geometry ) {
+dracoLoader7.load( './models/matsudas.drc', function ( geometry ) {
   geometry.computeVertexNormals();
   var material = new THREE.MeshStandardMaterial( { vertexColors: THREE.VertexColors } );
   mesh7 = new THREE.Mesh( geometry, material );
