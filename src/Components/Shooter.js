@@ -19,13 +19,7 @@ const ChangeSound = new Audio("./assets/change.mp3");
 const ShotSound   = new Audio("./assets/shot.mp3");
 
 ShooterComponent.set({
-  type: ShootType.add,
-  addClass: true,
-  removeClass: false,
-  fire: false,
-  hit: false,
-  enableShot: true,
-  title: ""
+  type: ShootType.add
 });
 
 ShooterComponent.on('switch', e => {

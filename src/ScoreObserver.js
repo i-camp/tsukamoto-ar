@@ -3,10 +3,6 @@ import database from './firebaseDatabase'
 import ScoreCollection from './ScoreCollection'
 import ShootType from './ValueObjects/ShootType'
 import EventType from './ValueObjects/EventType'
-import GameObserver from './GameObserver'
-
-const gameObserver = new GameObserver();
-gameObserver.observe();
 
 export default class ScoreObserver {
 
@@ -33,15 +29,27 @@ export default class ScoreObserver {
       }
       console.log(this.collection.score(data.name));
     });
+
+    let currentGameId;
+    PubSub.subscribe(EventType.openGame, (e, data) => {
+      if (data) {
+        currentGameId = data.id;
+      }
+    });
     
-    // 1秒間隔で送る
+    // 10秒間隔で送る
     setInterval(
       () => {
       Object.keys(this.collection.scores).forEach(name => {
         let score = this.collection.score(name);
+        console.log({
+          game: currentGameId,
+          target: name,
+          plus: score.plus,
+          minus: score.minus
+        });
         if (score.plus > 0 || score.minus > 0) {
-          let currentGame = gameObserver.nowGameRound();
-          database.ref(`/commits/${currentGame}`).push().set({
+          database.ref(`/commits/${currentGameId}`).push().set({
             target: name,
             plus: score.plus,
             minus: score.minus
