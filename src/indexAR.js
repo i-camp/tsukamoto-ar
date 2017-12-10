@@ -177,7 +177,7 @@ let onProgress2 = function ( xhr ) {
 // load mesh2
 let dracoLoader2 = new THREE.DRACOLoader('darcojs/loaders/darco/');
 let mesh2
-dracoLoader2.load( './models/yasudrc20002.drc', function ( geometry ) {
+dracoLoader2.load( './models/okashitay.drc', function ( geometry ) {
   geometry.computeVertexNormals();
   var material = new THREE.MeshStandardMaterial( { vertexColors: THREE.VertexColors } );
   mesh2 = new THREE.Mesh( geometry, material );
