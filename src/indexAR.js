@@ -5,8 +5,8 @@ let isLoadedPublished = false;
 let modelNum = 0;
 const centerX = 0;
 const centerY = 0;
-let meshNames = ['meshName1', 'meshName2', 'meshName3', 'tsukamotoMesh1', 'tsukamotoMesh2', 
-                 'tsukamotoMesh3', 'tsukamotoMesh4', 'tsukamotoMesh5', 'tsukamotoMesh6'];
+let meshNames = ['teradaj', 'fujimakis', 'okashitay', 'suzukik', 'nakanoa', 
+                 'watanaber', 'haram', 'matsudas', 'watanabes'];
 const modelMaxNum = meshNames.length;
 const modesPath = './models/';
 var renderer  = new THREE.WebGLRenderer({
