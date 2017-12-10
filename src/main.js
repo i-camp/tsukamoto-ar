@@ -10,6 +10,20 @@ import GameObserver from './GameObserver'
 const gameObserver = new GameObserver();
 gameObserver.observe();
 
+/**
+ * @fileoverview serviceWorker register
+ */
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./service-worker.js', {scope: './'})
+      .then(registration => {
+          // Success
+          console.log('Service Worker Registered');
+      }).catch(error => {
+          // Error
+          console.error(error);
+  });
+}
+
 // 手元で強制的に確認できるようにコメントアウトで残しておきます。
 // setTimeout(() => {
 //   PubSub.publish(EventType.openGame);
