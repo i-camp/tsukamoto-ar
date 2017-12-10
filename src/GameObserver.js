@@ -28,7 +28,7 @@ export default class GameObserver {
         currentGame.closedAt !== undefined
       ) {
         console.log("closeGame");
-        PubSub.publish(EventType.closeGame);
+        PubSub.publish(EventType.closeGame, currentGame);
       }
 
     });

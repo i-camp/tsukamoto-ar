@@ -36,7 +36,7 @@ const options = {
   itemSelector: '.target', // e.g. '.picture-item'.
   roundTransforms: false, // Whether to round pixel values used in translate(x, y). This usually avoids blurriness.
   sizer: null, // Element or selector string. Use an element to determine the size of columns and gutters.
-  speed: 250, // Transition/animation speed (milliseconds).
+  speed: 500, // Transition/animation speed (milliseconds).
   staggerAmount: 15, // Transition delay offset for each item in milliseconds.
   staggerAmountMax: 150, // Maximum stagger delay in milliseconds.
   throttleTime: 300, // How often shuffle can be called on resize (in milliseconds).
@@ -57,6 +57,11 @@ PubSub.subscribe(EventType.openGame, (e, data) => {
 PubSub.subscribe(EventType.closeGame, (e, data) => {
   ScoreBoardComponent.set({
     targets:  Object.values(data.targets)
+  });
+  
+  let shuffle = new Shuffle(document.querySelector('.targets'), options);
+  shuffle.sort({
+    by: sortByOrder
   });
 });
 
