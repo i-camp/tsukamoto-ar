@@ -302,7 +302,7 @@ let onProgress6 = function ( xhr ) {
 // load mesh6
 let dracoLoader6 = new THREE.DRACOLoader('darcojs/loaders/darco/');
 let mesh6
-dracoLoader6.load( './models/haram.drc', function ( geometry ) {
+dracoLoader6.load( './models/haram_rot.drc', function ( geometry ) {
   geometry.computeVertexNormals();
   var material = new THREE.MeshStandardMaterial( { vertexColors: THREE.VertexColors } );
   mesh6 = new THREE.Mesh( geometry, material );
