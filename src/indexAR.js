@@ -239,7 +239,7 @@ let onProgress4 = function ( xhr ) {
 // load mesh4
 let dracoLoader4 = new THREE.DRACOLoader('darcojs/loaders/darco/');
 let mesh4
-dracoLoader4.load( './models/yasudrc20004.drc', function ( geometry ) {
+dracoLoader4.load( './models/nakanoa_rote.drc', function ( geometry ) {
   geometry.computeVertexNormals();
   var material = new THREE.MeshStandardMaterial( { vertexColors: THREE.VertexColors } );
   mesh4 = new THREE.Mesh( geometry, material );
