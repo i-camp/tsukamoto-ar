@@ -114,7 +114,7 @@ let onError = function ( xhr ) {};
 // load mesh0
 let dracoLoader0 = new THREE.DRACOLoader('darcojs/loaders/darco/');
 let mesh0
-dracoLoader0.load( './models/teradaj.drc', function ( geometry ) {
+dracoLoader0.load( './models/teradaj_rot.drc', function ( geometry ) {
   geometry.computeVertexNormals();
   var material = new THREE.MeshStandardMaterial( { vertexColors: THREE.VertexColors } );
   mesh0 = new THREE.Mesh( geometry, material );
@@ -146,7 +146,7 @@ let onProgress1 = function ( xhr ) {
 // load mesh1
 let dracoLoader1 = new THREE.DRACOLoader('darcojs/loaders/darco/');
 let mesh1
-dracoLoader1.load( './models/fujimaki.drc', function ( geometry ) {
+dracoLoader1.load( './models/fujimaki_rot.drc', function ( geometry ) {
   geometry.computeVertexNormals();
   var material = new THREE.MeshStandardMaterial( { vertexColors: THREE.VertexColors } );
   mesh1 = new THREE.Mesh( geometry, material );
@@ -208,7 +208,7 @@ let onProgress3 = function ( xhr ) {
 // load mesh3 of marker3
 let dracoLoader3 = new THREE.DRACOLoader('darcojs/loaders/darco/');
 let mesh3
-dracoLoader3.load( './models/suzukik.drc', function ( geometry ) {
+dracoLoader3.load( './models/suzukik_rot.drc', function ( geometry ) {
   geometry.computeVertexNormals();
   var material = new THREE.MeshStandardMaterial( { vertexColors: THREE.VertexColors } );
   mesh3 = new THREE.Mesh( geometry, material );
@@ -302,7 +302,7 @@ let onProgress6 = function ( xhr ) {
 // load mesh6
 let dracoLoader6 = new THREE.DRACOLoader('darcojs/loaders/darco/');
 let mesh6
-dracoLoader6.load( './models/haram.drc', function ( geometry ) {
+dracoLoader6.load( './models/haram_rot.drc', function ( geometry ) {
   geometry.computeVertexNormals();
   var material = new THREE.MeshStandardMaterial( { vertexColors: THREE.VertexColors } );
   mesh6 = new THREE.Mesh( geometry, material );
@@ -333,7 +333,7 @@ let onProgress7 = function ( xhr ) {
 // load mesh7
 let dracoLoader7 = new THREE.DRACOLoader('darcojs/loaders/darco/');
 let mesh7
-dracoLoader7.load( './models/matsudas.drc', function ( geometry ) {
+dracoLoader7.load( './models/matsudas_rot.drc', function ( geometry ) {
   geometry.computeVertexNormals();
   var material = new THREE.MeshStandardMaterial( { vertexColors: THREE.VertexColors } );
   mesh7 = new THREE.Mesh( geometry, material );
@@ -364,16 +364,13 @@ let onProgress8 = function ( xhr ) {
 // load model.obj of marker8
 let dracoLoader8 = new THREE.DRACOLoader('darcojs/loaders/darco/');
 let mesh8
-dracoLoader8.load( './models/watanabes.drc', function ( geometry ) {
+dracoLoader8.load( './models/watanabes_rot.drc', function ( geometry ) {
 
   geometry.computeVertexNormals();
   var material = new THREE.MeshStandardMaterial( { vertexColors: THREE.VertexColors } );
   mesh8 = new THREE.Mesh( geometry, material );
   mesh8.castShadow = true;
   mesh8.receiveShadow = true;
-  mesh8.scale.x = 3.0;
-  mesh8.scale.y = 3.0;
-  mesh8.scale.z = 3.0;
   mesh8.name = meshNames[8];
   marker8.add(mesh8);
 }, onProgress8, onError );
