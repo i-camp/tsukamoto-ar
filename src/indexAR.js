@@ -417,11 +417,12 @@ function isCenter() {
   var hitObj = ray.intersectObjects(scene.children, true);
   if (hitObj.length > 0) {
     isDisplay = true;
-    console.log(hitObj[0].object.name);
+    //console.log(hitObj[0].object.name);
     objectName = hitObj[0].object.name;
   } else {
     isDisplay = false;
   }
+
 }
 
 // render the whole thing on the page
@@ -447,5 +448,6 @@ requestAnimationFrame(function animate(nowMsec){
 PubSub.subscribe(EventType.shot, e => {
   if (isDisplay) {
     PubSub.publish(EventType.isHit, {name: objectName});
+    isDisplay = false;
   }
 });
