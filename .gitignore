@@ -1,3 +1,4 @@
 node_modules
 /index.js
 /score_board.js
+/service-worker.js

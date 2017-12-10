@@ -20,12 +20,15 @@
     "shufflejs": "^5.0.3",
     "svelte": "^1.41.2",
     "svelte-loader": "^2.1.0",
+    "sw-precache": "^5.2.0",
+    "sw-toolbox": "^3.6.0",
     "webpack": "^3.8.1",
     "webpack-dev-server": "^2.9.4"
   },
   "scripts": {
-    "build": "webpack",
+    "build": "webpack && yarn run sw-build",
     "server": "webpack-dev-server",
-    "deploy": "firebase deploy"
+    "deploy": "firebase deploy",
+    "sw-build": "sw-precache --config=./sw-precache-config.js --verbose"
   }
 }
