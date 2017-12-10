@@ -114,7 +114,7 @@ let onError = function ( xhr ) {};
 // load mesh0
 let dracoLoader0 = new THREE.DRACOLoader('darcojs/loaders/darco/');
 let mesh0
-dracoLoader0.load( './models/matsudas.drc', function ( geometry ) {
+dracoLoader0.load( './models/teradaj.drc', function ( geometry ) {
   geometry.computeVertexNormals();
   var material = new THREE.MeshStandardMaterial( { vertexColors: THREE.VertexColors } );
   mesh0 = new THREE.Mesh( geometry, material );
