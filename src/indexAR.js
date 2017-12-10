@@ -208,7 +208,7 @@ let onProgress3 = function ( xhr ) {
 // load mesh3 of marker3
 let dracoLoader3 = new THREE.DRACOLoader('darcojs/loaders/darco/');
 let mesh3
-dracoLoader3.load( './models/yasudrc20003.drc', function ( geometry ) {
+dracoLoader3.load( './models/suzukik.drc', function ( geometry ) {
   geometry.computeVertexNormals();
   var material = new THREE.MeshStandardMaterial( { vertexColors: THREE.VertexColors } );
   mesh3 = new THREE.Mesh( geometry, material );
