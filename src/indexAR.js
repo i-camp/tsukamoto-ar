@@ -270,7 +270,7 @@ let onProgress5 = function ( xhr ) {
 // load mesh5 
 let dracoLoader5 = new THREE.DRACOLoader('darcojs/loaders/darco/');
 let mesh5
-dracoLoader5.load( './models/yasudrc20005.drc', function ( geometry ) {
+dracoLoader5.load( './models/watanabereo.drc', function ( geometry ) {
   geometry.computeVertexNormals();
   var material = new THREE.MeshStandardMaterial( { vertexColors: THREE.VertexColors } );
   mesh5 = new THREE.Mesh( geometry, material );
