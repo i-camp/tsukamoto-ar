@@ -7,9 +7,6 @@ import * as IndexAR from './indexAR.js'
 import * as RestrictIOS from './RestrictIOS.js'
 import GameObserver from './GameObserver'
 
-const gameObserver = new GameObserver();
-gameObserver.observe();
-
 /**
  * @fileoverview serviceWorker register
  */

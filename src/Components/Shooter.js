@@ -4,16 +4,12 @@ import Shooter from './Shooter.html'
 import ScoreObserver from '../ScoreObserver'
 import ShootType from '../ValueObjects/ShootType'
 import EventType from '../ValueObjects/EventType'
-import { setTimeout } from 'timers';
 
 const isVibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
 
 const ShooterComponent = new Shooter({
   target: document.querySelector('.shooter'),
 });
-
-const Observer = new ScoreObserver();
-Observer.observe();
 
 const ChangeSound = new Audio("./assets/change.mp3");
 const ShotSound   = new Audio("./assets/shot.mp3");
@@ -33,13 +29,13 @@ ShooterComponent.on('switch', e => {
       addClass: true,
       removeClass: false
     };
-    Observer.add();
+    ScoreObserver.add();
   } else {
     flg = {
       addClass: false,
       removeClass: true
     };
-    Observer.remove();
+    ScoreObserver.remove();
   }
   ShooterComponent.set(flg);
 });

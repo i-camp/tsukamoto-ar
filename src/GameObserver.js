@@ -2,20 +2,21 @@ import * as PubSub from 'pubsub-js'
 import database from './firebaseDatabase'
 import EventType from './ValueObjects/EventType'
 
-export default class GameObserver {
+class GameObserver {
   constructor() {
-    this.gameRound;
+    this.now;
+    this.observe();
   }
 
-  nowGameRound(){
-    return this.gameRound;
+  nowGame(){
+    return this.now;
   }
 
   observe() {
     database.ref(`/currentGame`).on('value', snapshot => {
       console.log(snapshot.val());
       let currentGame = snapshot.val();
-      this.gameRound = currentGame.id;
+      this.now = currentGame;
 
       // ゲームが開始されているかどうか
       if (
@@ -34,3 +35,5 @@ export default class GameObserver {
     });
   }
 }
+
+export default new GameObserver();
